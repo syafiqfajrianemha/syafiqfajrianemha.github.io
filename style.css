@@ -8,8 +8,10 @@
   font-family: "Open Sans", sans-serif;
 }
 body {
-  background-image: url('img/sativa.webp');
-  color: #333;
+  max-width: 100%;
+  /* height: 100vh; */
+  padding: 0 2rem;
+  /* background-color: salmon; */
 }
 table {
   border-collapse: collapse;
@@ -23,51 +25,74 @@ table thead tr {
 }
 table th,
 table td {
-    padding: 10px 15px;
+  padding: 10px 15px;
 }
 table tbody tr {
   border-bottom: 1px solid #dddddd;
 }
-input[type=text] {
+input[type="text"] {
   background-color: #eee;
   color: #000;
   border-color: rgb(51, 51, 51);
 }
-.container {
-  width: 960px;
-  margin: auto;
-}
+
 /* CSS Header */
-.logo {
+header {
   display: flex;
   justify-content: center;
-  background-color: #eee;
-}
-.header div {
-  display: flex;
   align-items: center;
-  color: #333;
-  padding: 5px 0;
+  gap: 1rem;
+  padding: 10px 0;
 }
+
 /* CSS Navigation */
-.menu {
+nav {
   background-color: #417aa8;
-  height: 50px;
-  line-height: 50px;
+  /* line-height: 50px; */
 }
-.menu ul {
+nav ul {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  text-align: center;
 }
-.menu ul li a {
+nav ul li a {
   color: #fff;
-  margin-right: 25px;
-  padding: 0 10px;
 }
-.menu ul li a:hover {
+nav ul li a:hover {
   background-color: #4b88bb;
   display: block;
 }
+
+.form__pertama {
+  overflow: auto;
+  margin-bottom: 50px;
+  /* background-color: #eee; */
+}
+.max-bobot {
+  text-align: center;
+}
+.input__content {
+  border: 1px solid gray;
+  padding: 5px 10px;
+  border-radius: 5px;
+  /* width: 100%; */
+}
+.input__content:focus {
+  outline: none;
+  border: 1px solid black;
+}
+
+.title {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.disable {
+  cursor: not-allowed;
+}
+
 .transaksiNilai,
 .simulasiAudit {
   text-transform: uppercase;
@@ -83,11 +108,10 @@ input[type=text] {
   padding: 20px 0;
 }
 /* CSS Footer */
-.footer {
-  padding: 15px;
-  background-color: #eaeaea;
-  font-size: 12px;
-  text-align: center;
+footer {
+  position: fixed;
+  width: fit-content;
+  bottom: 0;
 }
 /* CSS Simulasi Audit */
 .simulasiAudit {

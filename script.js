@@ -1,22 +1,24 @@
 function transaksiNilaiPertama() {
-  var skorPoinSatu = document.getElementById("skorPoinSatu").value;
-  var skorPoinDua = document.getElementById("skorPoinDua").value;
+  const skorPoinSatu = document.getElementById("skorPoinSatu").value;
+  const skorPoinDua = document.getElementById("skorPoinDua").value;
 
-  var txtDisplaySkorSatu = document.getElementById("txtDisplaySkorSatu");
-  var txtDisplaySkorDua = document.getElementById("txtDisplaySkorDua");
+  const txtDisplaySkorSatu = document.getElementById("txtDisplaySkorSatu");
+  const txtDisplaySkorDua = document.getElementById("txtDisplaySkorDua");
 
-  var totalNilaiPertama = document.getElementById("totalNilaiPertama");
+  const totalNilaiPertama = document.getElementById("totalNilaiPertama");
 
-  hasilSkorSatu = (skorPoinSatu / 50) * 50;
+  const hasilSkorSatu = (skorPoinSatu / 50) * 50;
   txtDisplaySkorSatu.value = hasilSkorSatu;
 
-  hasilSkorDua = (skorPoinDua / 50) * 50;
+  const hasilSkorDua = (skorPoinDua / 50) * 50;
   txtDisplaySkorDua.value = hasilSkorDua;
 
-  hasilTotalNilaiPertama = hasilSkorSatu + hasilSkorDua;
+  const hasilTotalNilaiPertama = hasilSkorSatu + hasilSkorDua;
   totalNilaiPertama.value = hasilTotalNilaiPertama;
 
-  var formPertama = document.getElementsByName("formTransaksiNilaiPertama")[0];
+  const formPertama = document.getElementsByName(
+    "formTransaksiNilaiPertama"
+  )[0];
   if (skorPoinSatu > 50) {
     alert("Skor melebihi bobot!. Silahkan masukkan skor 1-50");
     formPertama.reset();
@@ -30,72 +32,74 @@ function transaksiNilaiPertama() {
 
 function transaksiNilaiKedua() {
   // Skor A
-  var skorAsatu = parseInt(document.getElementById("skorAsatu").value);
-  var skorAdua = parseInt(document.getElementById("skorAdua").value);
-  var skorAtiga = parseInt(document.getElementById("skorAtiga").value);
+  const skorAsatu = parseInt(document.getElementById("skorAsatu").value);
+  const skorAdua = parseInt(document.getElementById("skorAdua").value);
+  const skorAtiga = parseInt(document.getElementById("skorAtiga").value);
 
   totalA = skorAsatu + skorAdua + skorAtiga;
-  var ratarataA = (document.getElementById("ratarataA").value = totalA / 3);
+  const ratarataA = (document.getElementById("ratarataA").value = totalA / 3);
 
   hasilSkorA = (ratarataA / 15) * 15;
   totalNilaiA = document.getElementById("txtDisplaySkorA").value = hasilSkorA;
 
   //   Skor B
-  var skorBsatu = parseInt(document.getElementById("skorBsatu").value);
-  var skorBdua = parseInt(document.getElementById("skorBdua").value);
-  var skorBtiga = parseInt(document.getElementById("skorBtiga").value);
+  const skorBsatu = parseInt(document.getElementById("skorBsatu").value);
+  const skorBdua = parseInt(document.getElementById("skorBdua").value);
+  const skorBtiga = parseInt(document.getElementById("skorBtiga").value);
 
   totalB = skorBsatu + skorBdua + skorBtiga;
-  var ratarataB = (document.getElementById("ratarataB").value = totalB / 3);
+  const ratarataB = (document.getElementById("ratarataB").value = totalB / 3);
 
   hasilSkorB = (ratarataB / 20) * 20;
   totalNilaiB = document.getElementById("txtDisplaySkorB").value = hasilSkorB;
 
   //   Skor C
-  var skorCsatu = parseInt(document.getElementById("skorCsatu").value);
-  var skorCdua = parseInt(document.getElementById("skorCdua").value);
-  var skorCtiga = parseInt(document.getElementById("skorCtiga").value);
+  const skorCsatu = parseInt(document.getElementById("skorCsatu").value);
+  const skorCdua = parseInt(document.getElementById("skorCdua").value);
+  const skorCtiga = parseInt(document.getElementById("skorCtiga").value);
 
   totalC = skorCsatu + skorCdua + skorCtiga;
-  var ratarataC = (document.getElementById("ratarataC").value = totalC / 3);
+  const ratarataC = (document.getElementById("ratarataC").value = totalC / 3);
 
   hasilSkorC = (ratarataC / 20) * 20;
   totalNilaiC = document.getElementById("txtDisplaySkorC").value = hasilSkorC;
 
   //   Skor D
-  var skorDsatu = parseInt(document.getElementById("skorDsatu").value);
-  var skorDdua = parseInt(document.getElementById("skorDdua").value);
-  var skorDtiga = parseInt(document.getElementById("skorDtiga").value);
+  const skorDsatu = parseInt(document.getElementById("skorDsatu").value);
+  const skorDdua = parseInt(document.getElementById("skorDdua").value);
+  const skorDtiga = parseInt(document.getElementById("skorDtiga").value);
 
   totalD = skorDsatu + skorDdua + skorDtiga;
-  var ratarataD = (document.getElementById("ratarataD").value = totalD / 3);
+  const ratarataD = (document.getElementById("ratarataD").value = totalD / 3);
 
   hasilSkorD = (ratarataD / 20) * 20;
   totalNilaiD = document.getElementById("txtDisplaySkorD").value = hasilSkorD;
 
   //   Skor E
-  var skorEsatu = parseInt(document.getElementById("skorEsatu").value);
-  var skorEdua = parseInt(document.getElementById("skorEdua").value);
-  var skorEtiga = parseInt(document.getElementById("skorEtiga").value);
+  const skorEsatu = parseInt(document.getElementById("skorEsatu").value);
+  const skorEdua = parseInt(document.getElementById("skorEdua").value);
+  const skorEtiga = parseInt(document.getElementById("skorEtiga").value);
 
   totalE = skorEsatu + skorEdua + skorEtiga;
-  var ratarataE = (document.getElementById("ratarataE").value = totalE / 3);
+  const ratarataE = (document.getElementById("ratarataE").value = totalE / 3);
 
   hasilSkorE = (ratarataE / 15) * 15;
   totalNilaiE = document.getElementById("txtDisplaySkorE").value = hasilSkorE;
 
   //   Skor F
-  var skorFsatu = parseInt(document.getElementById("skorFsatu").value);
-  var skorFdua = parseInt(document.getElementById("skorFdua").value);
-  var skorFtiga = parseInt(document.getElementById("skorFtiga").value);
+  const skorFsatu = parseInt(document.getElementById("skorFsatu").value);
+  const skorFdua = parseInt(document.getElementById("skorFdua").value);
+  const skorFtiga = parseInt(document.getElementById("skorFtiga").value);
 
   totalF = skorFsatu + skorFdua + skorFtiga;
-  var ratarataF = (document.getElementById("ratarataF").value = totalF / 3);
+  const ratarataF = (document.getElementById("ratarataF").value = totalF / 3);
 
   hasilSkorF = (ratarataF / 10) * 10;
   totalNilaiF = document.getElementById("txtDisplaySkorF").value = hasilSkorF;
 
-  var hasilTotalNilaiKedua = (document.getElementById("totalNilaiKedua").value =
+  const hasilTotalNilaiKedua = (document.getElementById(
+    "totalNilaiKedua"
+  ).value =
     totalNilaiA +
     totalNilaiB +
     totalNilaiC +
@@ -105,9 +109,10 @@ function transaksiNilaiKedua() {
 
   nilaiAkhirPertama = (hasilTotalNilaiPertama * 40) / 100;
   nilaiAkhirKedua = (hasilTotalNilaiKedua * 60) / 100;
-  var nilaiAkhir = document.getElementById("nilaiAkhir").value = nilaiAkhirPertama + nilaiAkhirKedua;
+  const nilaiAkhir = (document.getElementById("nilaiAkhir").value =
+    nilaiAkhirPertama + nilaiAkhirKedua);
 
-  var nilaiHuruf = document.getElementById("nilaiHuruf");
+  const nilaiHuruf = document.getElementById("nilaiHuruf");
   if (nilaiAkhir >= 86 && nilaiAkhir <= 100) {
     nilaiHuruf.innerHTML = "A";
   } else if (nilaiAkhir >= 81 && nilaiAkhir < 86) {
@@ -130,11 +135,11 @@ function transaksiNilaiKedua() {
 }
 
 function simulasiAudit() {
-  var nilaiIndikator1 = parseInt(
+  const nilaiIndikator1 = parseInt(
     document.getElementById("nilaiIndikator1").value
   );
-  var skorIndikator1 = document.getElementById("skorIndikator1");
-  var hasilIndikator1 = 0;
+  const skorIndikator1 = document.getElementById("skorIndikator1");
+  const hasilIndikator1 = 0;
 
   if (nilaiIndikator1 >= 80) {
     hasilIndikator1 = 4;
@@ -149,11 +154,11 @@ function simulasiAudit() {
   }
   skorIndikator1.innerHTML = hasilIndikator1;
 
-  var nilaiIndikator2 = parseInt(
+  const nilaiIndikator2 = parseInt(
     document.getElementById("nilaiIndikator2").value
   );
-  var skorIndikator2 = document.getElementById("skorIndikator2");
-  var hasilIndikator2 = 0;
+  const skorIndikator2 = document.getElementById("skorIndikator2");
+  const hasilIndikator2 = 0;
 
   if (nilaiIndikator2 >= 80) {
     hasilIndikator2 = 4;
@@ -168,11 +173,11 @@ function simulasiAudit() {
   }
   skorIndikator2.innerHTML = hasilIndikator2;
 
-  var nilaiIndikator3 = parseInt(
+  const nilaiIndikator3 = parseInt(
     document.getElementById("nilaiIndikator3").value
   );
-  var skorIndikator3 = document.getElementById("skorIndikator3");
-  var hasilIndikator3 = 0;
+  const skorIndikator3 = document.getElementById("skorIndikator3");
+  const hasilIndikator3 = 0;
 
   if (nilaiIndikator3 >= 80) {
     hasilIndikator3 = 4;
@@ -187,11 +192,11 @@ function simulasiAudit() {
   }
   skorIndikator3.innerHTML = hasilIndikator3;
 
-  var nilaiIndikator4 = parseInt(
+  const nilaiIndikator4 = parseInt(
     document.getElementById("nilaiIndikator4").value
   );
-  var skorIndikator4 = document.getElementById("skorIndikator4");
-  var hasilIndikator4 = 0;
+  const skorIndikator4 = document.getElementById("skorIndikator4");
+  const hasilIndikator4 = 0;
 
   if (nilaiIndikator4 >= 80) {
     hasilIndikator4 = 4;
@@ -206,8 +211,8 @@ function simulasiAudit() {
   }
   skorIndikator4.innerHTML = hasilIndikator4;
 
-  var ratarataNilai = document.getElementById("ratarataNilai");
-  var ratarataSkor = document.getElementById("ratarataSkor");
+  const ratarataNilai = document.getElementById("ratarataNilai");
+  const ratarataSkor = document.getElementById("ratarataSkor");
 
   ratarataNilai.innerHTML =
     (nilaiIndikator1 + nilaiIndikator2 + nilaiIndikator3 + nilaiIndikator4) / 4;
