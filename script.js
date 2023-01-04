@@ -202,8 +202,33 @@ const nilaiKedua = [
   },
 ];
 
+const getRataRata = (e) => {
+  const { value, name } = e.target;
+  const skorPenguji = document.querySelectorAll("#skorPenguji");
+  const skorRataRata = document.querySelectorAll("#rataRata");
+
+  let hasilSkorPenguji = 0;
+  let hasilSkorRataRata = 0;
+
+  skorPenguji.forEach((skor) => {
+    if (skor.name === name) {
+      skor.value = value;
+    }
+    hasilSkorPenguji += parseInt(skor.value);
+  });
+
+  skorRataRata.forEach((rata) => {
+    if (rata.name === name) {
+      rata.value = hasilSkorPenguji / 3;
+    }
+    // hasilSkorRataRata += parseInt(rata.value);
+    rata.value = hasilSkorRataRata = hasilSkorPenguji / 3;
+  });
+  console.log(hasilSkorRataRata);
+};
+
 nilaiKedua.forEach((result) => {
-  const form = document.querySelector(".form__pertama");
+  const form = document.querySelector(".form__kedua");
   form.classList.add("form__kedua");
   const table = document.createElement("table");
 
@@ -248,60 +273,59 @@ nilaiKedua.forEach((result) => {
     tr.appendChild(komponenPenilaianElement);
 
     // skor penguji
-    data.skorPenguji.forEach((skorPenguji) => {
+    data.skorPenguji.forEach((sp) => {
       const skorPengujiElement = document.createElement("td");
       const skorPengujiElementInput = document.createElement("input");
       skorPengujiElementInput.setAttribute("type", "number");
       skorPengujiElementInput.setAttribute("autocomplete", "off");
       skorPengujiElementInput.setAttribute("id", "skorPenguji");
       // get different name for each input
-      skorPengujiElementInput.setAttribute("name", data.no);
+      skorPengujiElementInput.setAttribute("name", data.no + sp);
       skorPengujiElementInput.setAttribute("min", "0");
       skorPengujiElementInput.setAttribute("max", "4");
       skorPengujiElementInput.setAttribute("value", "0");
       skorPengujiElementInput.classList.add("input__content");
+      skorPengujiElementInput.addEventListener("input", getRataRata);
       skorPengujiElement.appendChild(skorPengujiElementInput);
       tr.appendChild(skorPengujiElement);
     });
 
-    // // rata-rata
-    // const rataRataElement = document.createElement("td");
-    // const rataRataElementInput = document.createElement("input");
-    // rataRataElementInput.setAttribute("type", "number");
-    // rataRataElementInput.setAttribute("disabled", "disabled");
-    // rataRataElementInput.setAttribute("autocomplete", "off");
-    // rataRataElementInput.setAttribute("id", "rataRata");
-    // // get different name for each input
-    // rataRataElementInput.setAttribute("name", data.no);
-    // rataRataElementInput.setAttribute("min", "0");
-    // rataRataElementInput.setAttribute("max", "4");
-    // rataRataElementInput.setAttribute("value", "0");
-    // rataRataElementInput.classList.add("input__content");
-    // rataRataElement.appendChild(rataRataElementInput);
-    // tr.appendChild(rataRataElement);
+    // rata-rata
+    const rataRataElement = document.createElement("td");
+    const rataRataElementInput = document.createElement("input");
+    rataRataElementInput.setAttribute("type", "number");
+    rataRataElementInput.setAttribute("disabled", "disabled");
+    rataRataElementInput.setAttribute("autocomplete", "off");
+    rataRataElementInput.setAttribute("id", "rataRata");
+    // get different name for each input
+    rataRataElementInput.setAttribute("name", data.no);
+    rataRataElementInput.setAttribute("min", "0");
+    rataRataElementInput.setAttribute("max", "4");
+    rataRataElementInput.setAttribute("value", "0");
+    rataRataElementInput.classList.add("input__content");
+    rataRataElement.appendChild(rataRataElementInput);
+    tr.appendChild(rataRataElement);
 
-    // // bobot
-    // const bobotElement = document.createElement("td");
-    // bobotElement.textContent = data.bobot;
-    // tr.appendChild(bobotElement);
+    // bobot
+    const bobotElement = document.createElement("td");
+    bobotElement.textContent = data.bobot;
+    tr.appendChild(bobotElement);
 
-    // // bobot x skor
-    // const bobotxSkorElement = document.createElement("td");
-    // const bobotxSkorElementInput = document.createElement("input");
-    // bobotxSkorElementInput.setAttribute("type", "number");
-    // bobotxSkorElementInput.setAttribute("disabled", "disabled");
-    // bobotxSkorElementInput.setAttribute("autocomplete", "off");
-    // bobotxSkorElementInput.setAttribute("id", "bobotxSkor");
-    // // get different name for each input
-    // bobotxSkorElementInput.setAttribute("name", data.no);
-    // bobotxSkorElementInput.setAttribute("min", "0");
-    // bobotxSkorElementInput.setAttribute("max", "4");
-    // bobotxSkorElementInput.setAttribute("value", "0");
-    // bobotxSkorElementInput.classList.add("input__content");
-    // bobotxSkorElement.appendChild(bobotxSkorElementInput);
-    // tr.appendChild(bobotxSkorElement);
-
-    // tBody.appendChild(tr);
+    // bobot x skor
+    const bobotxSkorElement = document.createElement("td");
+    const bobotxSkorElementInput = document.createElement("input");
+    bobotxSkorElementInput.setAttribute("type", "number");
+    bobotxSkorElementInput.setAttribute("disabled", "disabled");
+    bobotxSkorElementInput.setAttribute("autocomplete", "off");
+    bobotxSkorElementInput.setAttribute("id", "bobotxSkor");
+    // get different name for each input
+    bobotxSkorElementInput.setAttribute("name", data.no);
+    bobotxSkorElementInput.setAttribute("min", "0");
+    bobotxSkorElementInput.setAttribute("max", "4");
+    bobotxSkorElementInput.setAttribute("value", "0");
+    bobotxSkorElementInput.classList.add("input__content");
+    bobotxSkorElement.appendChild(bobotxSkorElementInput);
+    tr.appendChild(bobotxSkorElement);
 
     // // add event listener to input
     // skorPengujiElementInput.addEventListener("input", (e) => {
@@ -313,15 +337,14 @@ nilaiKedua.forEach((result) => {
 
     // rataRataElementInput.addEventListener("input", (e) => {
     //   const value = e.target.value;
-    //   bobotxSkorElementInput.value = value * data.bobot;
+    //   // bobotxSkorElementInput.value = value * data.bobot;
+    //   rataRataElementInput.value = value;
     // });
 
     // bobotxSkorElementInput.addEventListener("input", (e) => {
     //   const value = e.target.value;
     //   rataRataElementInput.value = value / data.bobot;
     // });
-
-    // tBody.appendChild(tr);
 
     tBody.appendChild(tr);
     table.appendChild(tBody);

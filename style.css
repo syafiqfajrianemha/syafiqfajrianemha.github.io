@@ -100,6 +100,12 @@ nav ul li a:hover {
   cursor: not-allowed;
 }
 
+.form__pertama,
+.form__kedua {
+  margin-bottom: 3rem;
+  overflow: auto;
+}
+
 .transaksiNilai,
 .simulasiAudit {
   text-transform: uppercase;
