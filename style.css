@@ -88,6 +88,13 @@ nav ul li a:hover {
   text-align: center;
   margin: 2rem 0;
 }
+.no {
+  width: 5%;
+}
+.ini__table {
+  background-color: lightblue;
+  width: 10%;
+}
 
 .disable {
   cursor: not-allowed;

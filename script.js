@@ -219,3 +219,118 @@ function simulasiAudit() {
   ratarataSkor.innerHTML =
     (hasilIndikator1 + hasilIndikator2 + hasilIndikator3 + hasilIndikator4) / 4;
 }
+
+const nilaiPertama = [
+  {
+    title: "Simulasi Nilai Skripsi",
+    subTitle: ["No", "Komponen Penilaian ", "Skor", "Bobot", "Bobot x Skor"],
+    data: [
+      {
+        no: "1",
+        komponenPenilaian:
+          "Ketepatan dan kedisiplinan selama pelaksanaan bimbingan skripsi",
+        bobot: 50,
+      },
+      {
+        no: "2",
+        komponenPenilaian:
+          "Kemauan dan tingkat keseriusan dalam menyelesaikan skripsi",
+        bobot: 50,
+      },
+    ],
+    // total: 100,
+  },
+];
+
+// const form = document.createElement("form");
+const form = document.querySelector(".form__pertama");
+form.classList.add("form__pertama");
+
+nilaiPertama.forEach((section) => {
+  const table = document.createElement("table");
+
+  const thead = document.createElement("thead");
+  const subTitleContent = document.createElement("tr");
+
+  section.subTitle.forEach((title) => {
+    const subTitleElement = document.createElement("th");
+    subTitleElement.innerHTML = title;
+    subTitleContent.appendChild(subTitleElement);
+    thead.appendChild(subTitleContent);
+    table.appendChild(thead);
+    // form.appendChild(table);
+  });
+
+  const tBody = document.createElement("tbody");
+  section.data.forEach((data) => {
+    const tr = document.createElement("tr");
+
+    const noElement = document.createElement("td");
+    noElement.textContent = data.no;
+    tr.appendChild(noElement);
+
+    const komponenPenilaianElement = document.createElement("td");
+    komponenPenilaianElement.textContent = data.komponenPenilaian;
+    tr.appendChild(komponenPenilaianElement);
+
+    const skorElement = document.createElement("td");
+    const skorElementInput = document.createElement("input");
+    skorElementInput.setAttribute("type", "number");
+    skorElementInput.setAttribute("autocomplete", "off");
+    skorElementInput.setAttribute("id", "skor");
+    skorElementInput.setAttribute("name", "skor");
+    skorElementInput.setAttribute("min", "0");
+    skorElementInput.setAttribute("max", "50");
+    skorElementInput.setAttribute("value", "0");
+    // skorElementInput.setAttribute("onchange", "hitungNilai()");
+    skorElement.appendChild(skorElementInput);
+    tr.appendChild(skorElement);
+
+    const bobotElement = document.createElement("td");
+    bobotElement.textContent = data.bobot;
+    tr.appendChild(bobotElement);
+
+    const bobotxskorElement = document.createElement("td");
+    const bobotxskorElementInput = document.createElement("input");
+    bobotxskorElementInput.setAttribute("type", "number");
+    // disable input
+    bobotxskorElementInput.setAttribute("disabled", "disabled");
+    bobotxskorElementInput.setAttribute("autocomplete", "off");
+    bobotxskorElementInput.setAttribute("id", "bobotxskor");
+    bobotxskorElementInput.setAttribute("name", "bobotxskor");
+    bobotxskorElementInput.setAttribute("min", "0");
+    bobotxskorElementInput.setAttribute("max", "4");
+    bobotxskorElementInput.setAttribute("value", "0");
+    bobotxskorElement.appendChild(bobotxskorElementInput);
+    tr.appendChild(bobotxskorElement);
+
+    tBody.appendChild(tr);
+    table.appendChild(tBody);
+  });
+
+  const totalTr = document.createElement("tr");
+  const totalTd = document.createElement("td");
+  const totalBobot = document.createElement("td");
+  const totalBobotxSkor = document.createElement("td");
+  const totalBobotxSkorInput = document.createElement("input");
+
+  totalTd.setAttribute("colspan", "3");
+  totalTd.textContent = "Total";
+  const total = section.data.reduce((acc, cur) => acc + cur.bobot, 0);
+  totalBobot.textContent = total;
+  totalBobotxSkorInput.setAttribute("type", "number");
+  totalBobotxSkorInput.setAttribute("disabled", "disabled");
+  totalBobotxSkorInput.setAttribute("autocomplete", "off");
+  totalBobotxSkorInput.setAttribute("id", "totalBobotxSkor");
+  totalBobotxSkorInput.setAttribute("name", "totalBobotxSkor");
+  totalBobotxSkorInput.setAttribute("min", "0");
+  totalBobotxSkorInput.setAttribute("max", "4");
+  totalBobotxSkorInput.setAttribute("value", "0");
+  totalBobotxSkor.appendChild(totalBobotxSkorInput);
+
+  totalTr.appendChild(totalTd);
+  totalTr.appendChild(totalBobot);
+  totalTr.appendChild(totalBobotxSkor);
+  tBody.appendChild(totalTr);
+  form.appendChild(table);
+});
