@@ -198,6 +198,7 @@ const nilaiKedua = [
         skorPenguji: ["penguji 1", "penguji 2", "penguji 3"],
       },
     ],
+    jumlahPenguji: ["1", "2", "3"],
   },
 ];
 
@@ -208,27 +209,27 @@ nilaiKedua.forEach((result) => {
 
   const thead = document.createElement("thead");
   const subTitleContent = document.createElement("tr");
+  const addScorPengujiContent = document.createElement("tr");
 
   result.subTitle.forEach((subTitle) => {
     const subTitleElement = document.createElement("th");
+    subTitleElement.setAttribute("rowspan", "2");
+    if (subTitle === "Skor Penguji") {
+      subTitleElement.setAttribute("colspan", "3");
+      subTitleElement.removeAttribute("rowspan");
+    }
     subTitleElement.textContent = subTitle;
     subTitleContent.appendChild(subTitleElement);
   });
 
-  // const addSkorPengujiContent = document.createElement("tr");
-  // const addSkorPengujiElement = document.createElement("th");
-  // const arrPenguji = ["1", "2", "3"];
-  // addSkorPengujiElement.setAttribute("colspan", "2");
-  // // addSkorPengujiElement.textContent = "Skor Penguji";
-  // addSkorPengujiContent.appendChild(addSkorPengujiElement);
-  // arrPenguji.forEach((penguji) => {
-  //   const addSkorPengujiElement = document.createElement("th");
-  //   addSkorPengujiElement.textContent = penguji;
-  //   addSkorPengujiContent.appendChild(addSkorPengujiElement);
-  // });
+  result.jumlahPenguji.forEach((jumlahPenguji) => {
+    const addSkorPengujiContent = document.createElement("th");
+    addSkorPengujiContent.textContent = `${jumlahPenguji}`;
+    addScorPengujiContent.appendChild(addSkorPengujiContent);
+  });
 
   thead.appendChild(subTitleContent);
-  // thead.appendChild(addSkorPengujiContent);
+  thead.appendChild(addScorPengujiContent);
 
   const tBody = document.createElement("tbody");
   result.data.forEach((data) => {
