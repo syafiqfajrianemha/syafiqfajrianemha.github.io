@@ -102,7 +102,8 @@ input[type="number"]::-webkit-outer-spin-button {
 #bobotxskor,
 #skorPenguji,
 #totalNilai,
-#nilaiAkhir {
+#nilaiAkhir,
+#totalBobotxSkor {
   text-align: center;
 }
 
@@ -151,9 +152,10 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 /* CSS Footer */
 footer {
-  position: fixed;
-  width: fit-content;
-  bottom: 0;
+  padding: 15px;
+  background-color: #eaeaea;
+  font-size: 12px;
+  text-align: center;
 }
 /* CSS Simulasi Audit */
 .simulasiAudit {
