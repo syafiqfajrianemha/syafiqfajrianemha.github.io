@@ -206,78 +206,37 @@ const getRataRata = function (e) {
   const { value, name, untuk } = e.target;
   const skorPenguji = document.querySelectorAll("#skorPenguji");
   const skorRataRata = document.querySelectorAll("#rataRata");
+  const bobotxSkor = document.querySelectorAll("#bobotxSkor");
   const rataContent = document.querySelectorAll(".rata__content");
 
   let hasilSkorPenguji = 0;
-  let hasilSkorRataRata = 0;
   let res = 0;
 
   skorPenguji.forEach((skor) => {
     if (skor.name === name) {
       hasilSkorPenguji += parseInt(skor.value);
+
       skorRataRata.forEach((rataRata) => {
         if (rataRata.name === name) {
           rataRata.value = hasilSkorPenguji / 3;
+          res = hasilSkorPenguji / 3;
         }
       });
     }
   });
 
-  // !
-  // skorPenguji.forEach((skor) => {
-  //   hasilSkorPenguji += parseInt(skor.value);
-  //   skorRataRata.forEach((rataRata) => {
-  //     if (rataRata.name === name) {
-  //       rataRata.value = hasilSkorPenguji / 3;
-  //     }
-  //   });
-  // });
-  // !
-
-  // res = hasilSkorRataRata / hasilSkorPenguji;
-  // res = hasilSkorPenguji / 3;
-  // console.log(res);
-  // console.log(hasilSkorPenguji);
-
-  // skorPenguji.forEach((skor) => {
-  //   [skor.name] = value;
-  //   hasilSkorPenguji += parseInt(skor.value);
-
-  //   skorRataRata.forEach((rataRata) => {
-  //     const x = rataRata.name === name;
-  //   });
-  // });
-  // console.log(hasilSkorPenguji);
-
-  // console.log(hasilSkorPenguji);
-
-  // skorRataRata.forEach((rataRata) => {
-  //   if (rataRata.name === name) {
-  //     rataRata.value = value;
-  //   }
-  //   hasilSkorRataRata += parseInt(rataRata.value);
-  // });
-  // console.log(hasilSkorPenguji);
-
-  // let hasilSkorPenguji = 0;
-  // let hasilSkorRataRata = 0;
-
-  // skorPenguji.forEach((skor) => {
-  //   if (skor.name === name) {
-  //     skor.value = value;
-  //   }
-  //   hasilSkorPenguji += parseInt(skor.value);
-  // });
-
-  // skorRataRata.forEach((rata) => {
-  //   if (rata.name === name) {
-  //     rata.value = hasilSkorPenguji / 3;
-  //   }
-  //   // hasilSkorRataRata += parseInt(rata.value);
-  //   rata.value = hasilSkorRataRata = hasilSkorPenguji / 3;
-  // });
-  // console.log(hasilSkorRataRata);
+  bobotxSkor.forEach((bobot, i) => {
+    if (bobot.name === name) {
+      const getBobot = nilaiKedua[0].data[i].bobot;
+      const bobotRes = (res / getBobot) * getBobot;
+      bobot.value = bobotRes;
+      console.log(res);
+    }
+  });
 };
+
+// console.log(getBobot);
+// const skorPengujiLength = nilaiKedua[0].data[0].skorPenguji.length;
 
 nilaiKedua.forEach((result) => {
   const form = document.querySelector(".form__kedua");
@@ -395,11 +354,12 @@ nilaiKedua.forEach((result) => {
     bobotxSkorElementInput.setAttribute("autocomplete", "off");
     bobotxSkorElementInput.setAttribute("id", "bobotxSkor");
     // get different name for each input
-    bobotxSkorElementInput.setAttribute("name", data.no);
+    bobotxSkorElementInput.setAttribute("name", `${data.no} x `);
     bobotxSkorElementInput.setAttribute("min", "0");
     bobotxSkorElementInput.setAttribute("max", "4");
     bobotxSkorElementInput.setAttribute("value", "0");
     bobotxSkorElementInput.classList.add("input__content");
+    // bobotxSkorElementInput.addEventListener("input", getBobotxSkor);
     bobotxSkorElement.appendChild(bobotxSkorElementInput);
     tr.appendChild(bobotxSkorElement);
 
