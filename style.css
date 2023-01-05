@@ -30,10 +30,10 @@ table td {
 table tbody tr {
   border-bottom: 1px solid #dddddd;
 }
-input[type="text"] {
+input[type="number"] {
   background-color: #eee;
-  color: #000;
-  border-color: rgb(51, 51, 51);
+  color: gray;
+  /* border-color: rgb(51, 51, 51); */
 }
 
 /* CSS Header */
@@ -83,6 +83,28 @@ nav ul li a:hover {
   outline: none;
   border: 1px solid black;
 }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#rataRata,
+#bobotxSkor,
+#nilaiAkhir,
+#totalNilai {
+  text-align: center;
+  font-weight: bold;
+  color: gray;
+  width: 3rem;
+}
+
+#skor,
+#bobotxskor,
+#skorPenguji,
+#totalNilai,
+#nilaiAkhir {
+  text-align: center;
+}
 
 .title {
   text-align: center;
@@ -104,6 +126,13 @@ nav ul li a:hover {
 .form__kedua {
   margin-bottom: 3rem;
   overflow: auto;
+}
+
+.nilai-huruf {
+  text-align: center;
+  font-weight: bold;
+  color: salmon;
+  font-size: 1.2rem;
 }
 
 .transaksiNilai,

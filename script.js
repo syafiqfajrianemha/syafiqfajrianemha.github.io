@@ -19,41 +19,143 @@ const nilaiPertama = [
   },
 ];
 
-const hitungNilai = function (e) {
-  const hasilSkor = (e.target.value / 50) * 50;
+const onHandleInput = function (e) {
+  // KEDUA
+  // get rata-rata
+  const testerScores = document.querySelectorAll("#skorPenguji");
+  const averageScores = document.querySelectorAll("#rataRata");
+  const inputBobotxSkor__2 = document.querySelectorAll("#bobotxSkor");
+  const totalValue = document.querySelector("#totalNilai");
 
-  const { name, value } = e.target;
-  let resPertama = 0;
-  const bobotxskor = document.querySelectorAll("#bobotxskor");
+  const getName__2 = e.target.name;
+  const getValue__2 = e.target.value;
+  let resultTesterScores = 0;
+  let tempResult = 0;
 
-  value > 50
-    ? Swal.fire({
-        title: "Error!",
-        text: "Nilai maksimal 50",
-        icon: "error",
-        confirmButtonText: "Ok",
-      })
-    : isNaN(value) || value === "" || value === undefined
-    ? Swal.fire({
-        title: "Error!",
-        text: "Nilai tidak boleh kosong",
-        icon: "error",
-        confirmButtonText: "Ok",
-      })
-    : bobotxskor.forEach((result) => {
-        if (result.name === name) {
-          result.value = hasilSkor;
+  testerScores.forEach((skor) => {
+    if (skor.name === getName__2) {
+      resultTesterScores += parseInt(skor.value);
+
+      if (resultTesterScores >= 100) {
+        Swal.fire({
+          title: "Error!",
+          text: "Nilai maksimal 100",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+        // ! not finished yet
+        // averageScores.forEach((rataRata) => {
+        //   if (rataRata.name === getName__2) {
+        //     rataRata.value = 1;
+        //   }
+        // });
+        skor.value = 0;
+      }
+
+      // if the input user isn't a number or empty
+      isNaN(resultTesterScores) &&
+        Swal.fire({
+          title: "Error!",
+          text: "Isikan semua nilai penguji ",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+
+      averageScores.forEach((rataRata) => {
+        if (rataRata.name === getName__2) {
+          rataRata.value = (resultTesterScores / 3).toFixed(2);
+          tempResult = resultTesterScores / 3;
         }
-        resPertama += parseInt(result.value);
       });
+    }
+  });
 
+  let newBobot = 0;
+
+  inputBobotxSkor__2.forEach((bobot, i) => {
+    if (bobot.name === getName__2) {
+      const getBobot = nilaiKedua[0].data[i].bobot;
+      // const bobotRes = parseInt((tempResult / getBobot) * getBobot);
+      const bobotRes = (tempResult / getBobot) * getBobot;
+      bobot.value = bobotRes.toFixed(2);
+    }
+    newBobot += parseFloat(bobot.value);
+  });
+
+  // get nilai akhir__1
+  totalValue.value = newBobot;
+
+  // PERTAMA
+  const inputBobotxSkor = document.querySelectorAll("#bobotxskor");
+  const scores = document.querySelectorAll("#skor");
+
+  const getValue = e.target.value;
+  const getName = e.target.name;
+  const getUserInputValue = (getValue / 50) * 50;
+  let resultFirst = 0;
+
+  if (getValue > 50) {
+    Swal.fire({
+      title: "Error!",
+      text: "Nilai maksimal 50",
+      icon: "error",
+      confirmButtonText: "Ok",
+    });
+  } else if (isNaN(getValue) || getValue === "" || getValue === undefined) {
+    Swal.fire({
+      title: "Error!",
+      text: "Nilai tidak boleh kosong",
+      icon: "error",
+      confirmButtonText: "Ok",
+    });
+    // reset all input when the user input empty
+    scores.forEach((skor) => {
+      skor.placeholder = 0;
+    });
+  } else {
+    inputBobotxSkor.forEach((result) => {
+      if (result.name === getName) {
+        result.value = getUserInputValue;
+      }
+      resultFirst += parseInt(result.value);
+    });
+  }
+
+  // get total bobot x skor
   const totalBobotSkor = document.getElementById("totalBobotxSkor");
-  totalBobotSkor.value = resPertama;
-  hasilResPertama = (resPertama * 40) / 100;
-  console.log(hasilResPertama);
+  totalBobotSkor.value = resultFirst;
+
+  // get nilai akhir
+  const hasilAkhir = document.getElementById("nilaiAkhir");
+
+  const nilaiAkhirPertama = (resultFirst * 40) / 100;
+  const nilaiAkhirKedua = (newBobot * 60) / 100;
+  hasilAkhir.value = nilaiAkhirPertama + nilaiAkhirKedua;
+
+  // get nilai huruf
+  const nilaiHuruf = document.getElementById("nilaiHuruf");
+  if (nilaiAkhir >= 86 && nilaiAkhir <= 100) {
+    nilaiHuruf.innerHTML = "A";
+  } else if (nilaiAkhir >= 81 && nilaiAkhir < 86) {
+    nilaiHuruf.innerHTML = "A-";
+  } else if (nilaiAkhir >= 76 && nilaiAkhir < 81) {
+    nilaiHuruf.innerHTML = "B+";
+  } else if (nilaiAkhir >= 71 && nilaiAkhir < 76) {
+    nilaiHuruf.innerHTML = "B";
+  } else if (nilaiAkhir >= 66 && nilaiAkhir < 71) {
+    nilaiHuruf.innerHTML = "B-";
+  } else if (nilaiAkhir >= 61 && nilaiAkhir < 66) {
+    nilaiHuruf.innerHTML = "C+";
+  } else if (nilaiAkhir >= 56 && nilaiAkhir < 61) {
+    nilaiHuruf.innerHTML = "C";
+  } else if (nilaiAkhir >= 41 && nilaiAkhir < 56) {
+    nilaiHuruf.innerHTML = "D";
+  } else {
+    nilaiHuruf.innerHTML = "E";
+  }
 };
 
-// const form = document.createElement("form");
+// ! first form
 const form = document.querySelector(".form__pertama");
 form.classList.add("form__pertama");
 
@@ -96,9 +198,10 @@ nilaiPertama.forEach((result) => {
     // skorElementInput.setAttribute("name", "skor");
     skorElementInput.setAttribute("min", "0");
     skorElementInput.setAttribute("max", "50");
-    skorElementInput.setAttribute("value", "0");
+    // skorElementInput.setAttribute("value", "0");
+    skorElementInput.setAttribute("placeholder", "0");
     // when user change input, call function
-    skorElementInput.addEventListener("input", hitungNilai);
+    skorElementInput.addEventListener("input", onHandleInput);
     skorElementInput.classList.add("input__content");
 
     skorElement.appendChild(skorElementInput);
@@ -211,74 +314,6 @@ const nilaiKedua = [
   },
 ];
 
-// *
-let hasilResPertama = 0;
-let hasilResKedua = 0;
-
-console.log(hasilResPertama);
-
-const getRataRata = function (e) {
-  const { value, name, untuk } = e.target;
-  const skorPenguji = document.querySelectorAll("#skorPenguji");
-  const skorRataRata = document.querySelectorAll("#rataRata");
-  const bobotxSkor = document.querySelectorAll("#bobotxSkor");
-  // const rataContent = document.querySelectorAll(".rata__content");
-  const totalNilai = document.querySelector("#totalNilai");
-
-  let hasilSkorPenguji = 0;
-  let res = 0;
-  let hasilTotalNilaiPertama = 0;
-
-  // const nilaiAkhirPertama = (hasilTotalNilaiPertama * 40) / 100;
-  // const nilaiAkhirKedua = (hasilTotalNilaiKedua * 60) / 100;
-
-  skorPenguji.forEach((skor) => {
-    if (skor.name === name) {
-      hasilSkorPenguji += parseInt(skor.value);
-
-      // if the input user is not a number or empty
-      isNaN(hasilSkorPenguji)
-        ? Swal.fire({
-            title: "Error!",
-            text: "Nilai tidak boleh kosong",
-            icon: "error",
-            confirmButtonText: "Ok",
-          })
-        : console.log("ok");
-
-      skorRataRata.forEach((rataRata) => {
-        if (rataRata.name === name) {
-          rataRata.value = hasilSkorPenguji / 3;
-          res = hasilSkorPenguji / 3;
-        }
-      });
-    }
-  });
-
-  let newBobot = 0;
-  bobotxSkor.forEach((bobot, i) => {
-    if (bobot.name === name) {
-      const getBobot = nilaiKedua[0].data[i].bobot;
-
-      // const bobotRes = parseInt((res / getBobot) * getBobot);
-      const bobotRes = (res / getBobot) * getBobot;
-
-      bobot.value = bobotRes;
-    }
-    newBobot += parseFloat(bobot.value);
-  });
-  totalNilai.value = newBobot;
-};
-
-// bobotxskor.forEach((result) => {
-//   if (result.name === name) {
-//     result.value = hasilSkor;
-//   }
-//   res += parseInt(result.value);
-// });
-// console.log(getBobot);
-// const skorPengujiLength = nilaiKedua[0].data[0].skorPenguji.length;
-
 nilaiKedua.forEach((result) => {
   const form = document.querySelector(".form__kedua");
   form.classList.add("form__kedua");
@@ -332,14 +367,15 @@ nilaiKedua.forEach((result) => {
       skorPengujiElementInput.setAttribute("id", "skorPenguji");
       // get different name for each input
       skorPengujiElementInput.setAttribute("name", `${data.no} x `);
-      skorPengujiElementInput.setAttribute("untuk", `${data.no}`);
+      // skorPengujiElementInput.setAttribute("untuk", `${data.no}`);
       // skorPengujiElementInput.setAttribute("name", `${data.no} x ${sp}`);
       // skorPengujiElementInput.setAttribute("name", data.no + sp);
       skorPengujiElementInput.setAttribute("min", "0");
       skorPengujiElementInput.setAttribute("max", "4");
-      skorPengujiElementInput.setAttribute("value", "0");
+      // skorPengujiElementInput.setAttribute("value", "0");
+      skorPengujiElementInput.setAttribute("placeholder", "0");
       skorPengujiElementInput.classList.add("input__content");
-      skorPengujiElementInput.addEventListener("input", getRataRata);
+      skorPengujiElementInput.addEventListener("input", onHandleInput);
       skorPengujiElement.appendChild(skorPengujiElementInput);
       tr.appendChild(skorPengujiElement);
     });
@@ -378,7 +414,7 @@ nilaiKedua.forEach((result) => {
     rataRataElementInput.setAttribute("max", "4");
     rataRataElementInput.setAttribute("value", "0");
     rataRataElementInput.classList.add("input__content");
-    rataRataElementInput.addEventListener("input", getRataRata);
+    rataRataElementInput.addEventListener("input", onHandleInput);
     rataRataElement.appendChild(rataRataElementInput);
     tr.appendChild(rataRataElement);
 
@@ -464,20 +500,20 @@ nilaiKedua.forEach((result) => {
   const nilaiHurufTr = document.createElement("tr");
   const nilaiHurufTd = document.createElement("td");
   const nilaiHurufskor = document.createElement("td");
-  const nilaiHurufInput = document.createElement("input");
+  // const nilaiHurufInput = document.createElement("input");
 
   nilaiHurufTd.setAttribute("colspan", "7");
-  nilaiHurufTd.textContent = "Nilai Akhir";
-  nilaiHurufInput.setAttribute("type", "number");
-  nilaiHurufInput.setAttribute("disabled", "disabled");
-  nilaiHurufInput.setAttribute("autocomplete", "off");
-  nilaiHurufInput.setAttribute("id", "nilaiHuruf");
-  nilaiHurufInput.setAttribute("name", "nilaiHuruf");
-  nilaiHurufInput.setAttribute("min", "0");
-  nilaiHurufInput.setAttribute("max", "4");
-  nilaiHurufInput.setAttribute("value", "0");
-  nilaiHurufInput.classList.add("input__content");
-  nilaiHurufskor.appendChild(nilaiHurufInput);
+  nilaiHurufTd.textContent = "Nilai Huruf";
+  // nilaiHurufInput.setAttribute("type", "number");
+  // nilaiHurufInput.setAttribute("disabled", "disabled");
+  // nilaiHurufInput.setAttribute("autocomplete", "off");
+  nilaiHurufskor.setAttribute("id", "nilaiHuruf");
+  // nilaiHurufInput.setAttribute("name", "nilaiHuruf");
+  // nilaiHurufInput.setAttribute("min", "0");
+  // nilaiHurufInput.setAttribute("max", "4");
+  // nilaiHurufInput.setAttribute("value", "0");
+  nilaiHurufskor.classList.add("nilai-huruf");
+  // nilaiHurufskor.appendChild(nilaiHurufInput);
 
   nilaiHurufTr.appendChild(nilaiHurufTd);
   nilaiHurufTr.appendChild(nilaiHurufskor);
