@@ -23,7 +23,7 @@ const hitungNilai = function (e) {
   const hasilSkor = (e.target.value / 50) * 50;
 
   const { name, value } = e.target;
-  let res = 0;
+  let resPertama = 0;
   const bobotxskor = document.querySelectorAll("#bobotxskor");
 
   value > 50
@@ -33,15 +33,24 @@ const hitungNilai = function (e) {
         icon: "error",
         confirmButtonText: "Ok",
       })
+    : isNaN(value) || value === "" || value === undefined
+    ? Swal.fire({
+        title: "Error!",
+        text: "Nilai tidak boleh kosong",
+        icon: "error",
+        confirmButtonText: "Ok",
+      })
     : bobotxskor.forEach((result) => {
         if (result.name === name) {
           result.value = hasilSkor;
         }
-        res += parseInt(result.value);
+        resPertama += parseInt(result.value);
       });
 
   const totalBobotSkor = document.getElementById("totalBobotxSkor");
-  totalBobotSkor.value = res;
+  totalBobotSkor.value = resPertama;
+  hasilResPertama = (resPertama * 40) / 100;
+  console.log(hasilResPertama);
 };
 
 // const form = document.createElement("form");
@@ -202,19 +211,40 @@ const nilaiKedua = [
   },
 ];
 
+// *
+let hasilResPertama = 0;
+let hasilResKedua = 0;
+
+console.log(hasilResPertama);
+
 const getRataRata = function (e) {
   const { value, name, untuk } = e.target;
   const skorPenguji = document.querySelectorAll("#skorPenguji");
   const skorRataRata = document.querySelectorAll("#rataRata");
   const bobotxSkor = document.querySelectorAll("#bobotxSkor");
-  const rataContent = document.querySelectorAll(".rata__content");
+  // const rataContent = document.querySelectorAll(".rata__content");
+  const totalNilai = document.querySelector("#totalNilai");
 
   let hasilSkorPenguji = 0;
   let res = 0;
+  let hasilTotalNilaiPertama = 0;
+
+  // const nilaiAkhirPertama = (hasilTotalNilaiPertama * 40) / 100;
+  // const nilaiAkhirKedua = (hasilTotalNilaiKedua * 60) / 100;
 
   skorPenguji.forEach((skor) => {
     if (skor.name === name) {
       hasilSkorPenguji += parseInt(skor.value);
+
+      // if the input user is not a number or empty
+      isNaN(hasilSkorPenguji)
+        ? Swal.fire({
+            title: "Error!",
+            text: "Nilai tidak boleh kosong",
+            icon: "error",
+            confirmButtonText: "Ok",
+          })
+        : console.log("ok");
 
       skorRataRata.forEach((rataRata) => {
         if (rataRata.name === name) {
@@ -225,16 +255,27 @@ const getRataRata = function (e) {
     }
   });
 
+  let newBobot = 0;
   bobotxSkor.forEach((bobot, i) => {
     if (bobot.name === name) {
       const getBobot = nilaiKedua[0].data[i].bobot;
+
+      // const bobotRes = parseInt((res / getBobot) * getBobot);
       const bobotRes = (res / getBobot) * getBobot;
+
       bobot.value = bobotRes;
-      console.log(res);
     }
+    newBobot += parseFloat(bobot.value);
   });
+  totalNilai.value = newBobot;
 };
 
+// bobotxskor.forEach((result) => {
+//   if (result.name === name) {
+//     result.value = hasilSkor;
+//   }
+//   res += parseInt(result.value);
+// });
 // console.log(getBobot);
 // const skorPengujiLength = nilaiKedua[0].data[0].skorPenguji.length;
 
@@ -363,28 +404,85 @@ nilaiKedua.forEach((result) => {
     bobotxSkorElement.appendChild(bobotxSkorElementInput);
     tr.appendChild(bobotxSkorElement);
 
-    // // add event listener to input
-    // skorPengujiElementInput.addEventListener("input", (e) => {
-    //   const value = e.target.value;
-    //   const rataRata = (parseInt(value) + parseInt(value)) / 2;
-    //   rataRataElementInput.value = rataRata;
-    //   bobotxSkorElementInput.value = rataRata * data.bobot;
-    // });
-
-    // rataRataElementInput.addEventListener("input", (e) => {
-    //   const value = e.target.value;
-    //   // bobotxSkorElementInput.value = value * data.bobot;
-    //   rataRataElementInput.value = value;
-    // });
-
-    // bobotxSkorElementInput.addEventListener("input", (e) => {
-    //   const value = e.target.value;
-    //   rataRataElementInput.value = value / data.bobot;
-    // });
-
     tBody.appendChild(tr);
     table.appendChild(tBody);
   });
+
+  // total
+  const totalTr = document.createElement("tr");
+  const totalTd = document.createElement("td");
+  // const totalBobot = document.createElement("td");
+  const totalBobotxSkor = document.createElement("td");
+  const totalBobotxSkorInput = document.createElement("input");
+
+  totalTd.setAttribute("colspan", "7");
+  totalTd.textContent = "Total";
+  // const total = result.data.reduce((acc, cur) => acc + cur.bobot, 0);
+  // totalBobot.textContent = total;
+  totalBobotxSkorInput.setAttribute("type", "number");
+  totalBobotxSkorInput.setAttribute("disabled", "disabled");
+  totalBobotxSkorInput.setAttribute("autocomplete", "off");
+  totalBobotxSkorInput.setAttribute("id", "totalNilai");
+  totalBobotxSkorInput.setAttribute("name", "totalNilai");
+  totalBobotxSkorInput.setAttribute("min", "0");
+  totalBobotxSkorInput.setAttribute("max", "4");
+  totalBobotxSkorInput.setAttribute("value", "0");
+  totalBobotxSkorInput.classList.add("input__content");
+  totalBobotxSkor.appendChild(totalBobotxSkorInput);
+
+  totalTr.appendChild(totalTd);
+  // totalTr.appendChild(totalBobot);
+  totalTr.appendChild(totalBobotxSkor);
+  tBody.appendChild(totalTr);
+  form.appendChild(table);
+
+  // nilai akhir
+  const nilaiAkhirTr = document.createElement("tr");
+  const nilaiAkhirTd = document.createElement("td");
+  const nilaiAkhirskor = document.createElement("td");
+  const nilaiAkhirInput = document.createElement("input");
+
+  nilaiAkhirTd.setAttribute("colspan", "7");
+  nilaiAkhirTd.textContent = "Nilai Akhir";
+  nilaiAkhirInput.setAttribute("type", "number");
+  nilaiAkhirInput.setAttribute("disabled", "disabled");
+  nilaiAkhirInput.setAttribute("autocomplete", "off");
+  nilaiAkhirInput.setAttribute("id", "nilaiAkhir");
+  nilaiAkhirInput.setAttribute("name", "nilaiAkhir");
+  nilaiAkhirInput.setAttribute("min", "0");
+  nilaiAkhirInput.setAttribute("max", "4");
+  nilaiAkhirInput.setAttribute("value", "0");
+  nilaiAkhirInput.classList.add("input__content");
+  nilaiAkhirskor.appendChild(nilaiAkhirInput);
+
+  nilaiAkhirTr.appendChild(nilaiAkhirTd);
+  nilaiAkhirTr.appendChild(nilaiAkhirskor);
+  tBody.appendChild(nilaiAkhirTr);
+  form.appendChild(table);
+
+  // nilai huruf
+  const nilaiHurufTr = document.createElement("tr");
+  const nilaiHurufTd = document.createElement("td");
+  const nilaiHurufskor = document.createElement("td");
+  const nilaiHurufInput = document.createElement("input");
+
+  nilaiHurufTd.setAttribute("colspan", "7");
+  nilaiHurufTd.textContent = "Nilai Akhir";
+  nilaiHurufInput.setAttribute("type", "number");
+  nilaiHurufInput.setAttribute("disabled", "disabled");
+  nilaiHurufInput.setAttribute("autocomplete", "off");
+  nilaiHurufInput.setAttribute("id", "nilaiHuruf");
+  nilaiHurufInput.setAttribute("name", "nilaiHuruf");
+  nilaiHurufInput.setAttribute("min", "0");
+  nilaiHurufInput.setAttribute("max", "4");
+  nilaiHurufInput.setAttribute("value", "0");
+  nilaiHurufInput.classList.add("input__content");
+  nilaiHurufskor.appendChild(nilaiHurufInput);
+
+  nilaiHurufTr.appendChild(nilaiHurufTd);
+  nilaiHurufTr.appendChild(nilaiHurufskor);
+  tBody.appendChild(nilaiHurufTr);
+  form.appendChild(table);
 
   table.appendChild(thead);
   form.appendChild(table);
