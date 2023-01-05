@@ -202,29 +202,81 @@ const nilaiKedua = [
   },
 ];
 
-const getRataRata = (e) => {
-  const { value, name } = e.target;
+const getRataRata = function (e) {
+  const { value, name, untuk } = e.target;
   const skorPenguji = document.querySelectorAll("#skorPenguji");
   const skorRataRata = document.querySelectorAll("#rataRata");
+  const rataContent = document.querySelectorAll(".rata__content");
 
   let hasilSkorPenguji = 0;
   let hasilSkorRataRata = 0;
+  let res = 0;
 
   skorPenguji.forEach((skor) => {
     if (skor.name === name) {
-      skor.value = value;
+      hasilSkorPenguji += parseInt(skor.value);
+      skorRataRata.forEach((rataRata) => {
+        if (rataRata.name === name) {
+          rataRata.value = hasilSkorPenguji / 3;
+        }
+      });
     }
-    hasilSkorPenguji += parseInt(skor.value);
   });
 
-  skorRataRata.forEach((rata) => {
-    if (rata.name === name) {
-      rata.value = hasilSkorPenguji / 3;
-    }
-    // hasilSkorRataRata += parseInt(rata.value);
-    rata.value = hasilSkorRataRata = hasilSkorPenguji / 3;
-  });
-  console.log(hasilSkorRataRata);
+  // !
+  // skorPenguji.forEach((skor) => {
+  //   hasilSkorPenguji += parseInt(skor.value);
+  //   skorRataRata.forEach((rataRata) => {
+  //     if (rataRata.name === name) {
+  //       rataRata.value = hasilSkorPenguji / 3;
+  //     }
+  //   });
+  // });
+  // !
+
+  // res = hasilSkorRataRata / hasilSkorPenguji;
+  // res = hasilSkorPenguji / 3;
+  // console.log(res);
+  // console.log(hasilSkorPenguji);
+
+  // skorPenguji.forEach((skor) => {
+  //   [skor.name] = value;
+  //   hasilSkorPenguji += parseInt(skor.value);
+
+  //   skorRataRata.forEach((rataRata) => {
+  //     const x = rataRata.name === name;
+  //   });
+  // });
+  // console.log(hasilSkorPenguji);
+
+  // console.log(hasilSkorPenguji);
+
+  // skorRataRata.forEach((rataRata) => {
+  //   if (rataRata.name === name) {
+  //     rataRata.value = value;
+  //   }
+  //   hasilSkorRataRata += parseInt(rataRata.value);
+  // });
+  // console.log(hasilSkorPenguji);
+
+  // let hasilSkorPenguji = 0;
+  // let hasilSkorRataRata = 0;
+
+  // skorPenguji.forEach((skor) => {
+  //   if (skor.name === name) {
+  //     skor.value = value;
+  //   }
+  //   hasilSkorPenguji += parseInt(skor.value);
+  // });
+
+  // skorRataRata.forEach((rata) => {
+  //   if (rata.name === name) {
+  //     rata.value = hasilSkorPenguji / 3;
+  //   }
+  //   // hasilSkorRataRata += parseInt(rata.value);
+  //   rata.value = hasilSkorRataRata = hasilSkorPenguji / 3;
+  // });
+  // console.log(hasilSkorRataRata);
 };
 
 nilaiKedua.forEach((result) => {
@@ -262,7 +314,6 @@ nilaiKedua.forEach((result) => {
 
     // no
     const tr = document.createElement("tr");
-
     const noElement = document.createElement("td");
     noElement.textContent = data.no;
     tr.appendChild(noElement);
@@ -280,7 +331,10 @@ nilaiKedua.forEach((result) => {
       skorPengujiElementInput.setAttribute("autocomplete", "off");
       skorPengujiElementInput.setAttribute("id", "skorPenguji");
       // get different name for each input
-      skorPengujiElementInput.setAttribute("name", data.no + sp);
+      skorPengujiElementInput.setAttribute("name", `${data.no} x `);
+      skorPengujiElementInput.setAttribute("untuk", `${data.no}`);
+      // skorPengujiElementInput.setAttribute("name", `${data.no} x ${sp}`);
+      // skorPengujiElementInput.setAttribute("name", data.no + sp);
       skorPengujiElementInput.setAttribute("min", "0");
       skorPengujiElementInput.setAttribute("max", "4");
       skorPengujiElementInput.setAttribute("value", "0");
@@ -290,19 +344,41 @@ nilaiKedua.forEach((result) => {
       tr.appendChild(skorPengujiElement);
     });
 
-    // rata-rata
+    // const rataRataElement = document.createElement("td");
+    // const rataRataElementInput = document.createElement("input");
+    // rataRataElementInput.setAttribute("type", "number");
+    // // rataRataElementInput.setAttribute("disabled", "disabled");
+    // rataRataElementInput.setAttribute("autocomplete", "off");
+    // rataRataElementInput.setAttribute("id", "rataRata");
+    // // get different name for each input
+    // // rataRataElementInput.setAttribute("name", `${data.no} x`);
+    // rataRataElementInput.setAttribute("untuk", `${data.no}`);
+    // // data.skorPenguji.forEach((sp) => {
+    // //   rataRataElementInput.setAttribute("name", `${data.no} x ${sp}`);
+    // // });
+    // rataRataElementInput.setAttribute("min", "0");
+    // rataRataElementInput.setAttribute("max", "4");
+    // rataRataElementInput.setAttribute("value", "0");
+    // rataRataElementInput.classList.add("input__content");
+    // rataRataElement.appendChild(rataRataElementInput);
+    // tr.appendChild(rataRataElement);
+
     const rataRataElement = document.createElement("td");
     const rataRataElementInput = document.createElement("input");
     rataRataElementInput.setAttribute("type", "number");
-    rataRataElementInput.setAttribute("disabled", "disabled");
     rataRataElementInput.setAttribute("autocomplete", "off");
+    rataRataElementInput.setAttribute("disabled", "disabled");
     rataRataElementInput.setAttribute("id", "rataRata");
     // get different name for each input
-    rataRataElementInput.setAttribute("name", data.no);
+    rataRataElementInput.setAttribute("name", `${data.no} x `);
+    rataRataElementInput.setAttribute("untuk", `${data.no}`);
+    // rataRataElementInput.setAttribute("name", `${data.no} x ${sp}`);
+    // rataRataElementInput.setAttribute("name", data.no + sp);
     rataRataElementInput.setAttribute("min", "0");
     rataRataElementInput.setAttribute("max", "4");
     rataRataElementInput.setAttribute("value", "0");
     rataRataElementInput.classList.add("input__content");
+    rataRataElementInput.addEventListener("input", getRataRata);
     rataRataElement.appendChild(rataRataElementInput);
     tr.appendChild(rataRataElement);
 
