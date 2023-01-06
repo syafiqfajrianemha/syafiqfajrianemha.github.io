@@ -1,216 +1,480 @@
-function transaksiNilaiPertama() {
-  var skorPoinSatu = document.getElementById("skorPoinSatu").value;
-  var skorPoinDua = document.getElementById("skorPoinDua").value;
+// __nilai pertama
+const nilaiPertama = [
+  {
+    title: "Simulasi Nilai Skripsi",
+    subTitle: ["No", "Komponen Penilaian ", "Skor", "Bobot", "Bobot x Skor"],
+    data: [
+      {
+        no: "1",
+        komponenPenilaian:
+          "Ketepatan dan kedisiplinan selama pelaksanaan bimbingan skripsi",
+        bobot: 50,
+      },
+      {
+        no: "2",
+        komponenPenilaian:
+          "Kemauan dan tingkat keseriusan dalam menyelesaikan skripsi",
+        bobot: 50,
+      },
+    ],
+  },
+];
+// __nilai kedua
+const nilaiKedua = [
+  {
+    subTitle: [
+      "No",
+      "Komponen Penilaian",
+      "Skor Penguji",
+      "Rata-rata",
+      "Bobot",
+      "Bobot x Skor",
+    ],
+    data: [
+      {
+        no: "1",
+        komponenPenilaian: "Orisinalitas dan kebaruan topik penelitian",
+        bobot: 15,
+        skorPenguji: ["penguji 1", "penguji 2", "penguji 3"],
+      },
+      {
+        no: "2",
+        komponenPenilaian:
+          "RELEVANSI LOGIS ANTARA JUDUL, MASALAH, TEORI, METODE DAN HASIL PENELITIAN",
+        bobot: 20,
+        skorPenguji: ["penguji 1", "penguji 2", "penguji 3"],
+      },
+      {
+        no: "3",
+        komponenPenilaian: "TATA TULIS",
+        bobot: 20,
+        skorPenguji: ["penguji 1", "penguji 2", "penguji 3"],
+      },
+      {
+        no: "4",
+        komponenPenilaian: "PENGUASAAN MATERI PENELITIAN",
+        bobot: 20,
+        skorPenguji: ["penguji 1", "penguji 2", "penguji 3"],
+      },
+      {
+        no: "5",
+        komponenPenilaian: "PRESENTASI DAN ARGUMENTASI JAWABAN",
+        bobot: 15,
+        skorPenguji: ["penguji 1", "penguji 2", "penguji 3"],
+      },
+      {
+        no: "6",
+        komponenPenilaian: "PENAMPILAN SAAT PRESENTASI",
+        bobot: 10,
+        skorPenguji: ["penguji 1", "penguji 2", "penguji 3"],
+      },
+    ],
+    jumlahPenguji: ["1", "2", "3"],
+  },
+];
 
-  var txtDisplaySkorSatu = document.getElementById("txtDisplaySkorSatu");
-  var txtDisplaySkorDua = document.getElementById("txtDisplaySkorDua");
+const onHandleInput = (e) => {
+  const inputBobotxSkor = document.querySelectorAll("#bobotxskor");
+  const scores = document.querySelectorAll("#skor");
 
-  var totalNilaiPertama = document.getElementById("totalNilaiPertama");
+  const getValue = e.target.value;
+  const getName = e.target.name;
+  const getUserInputValue = (getValue / 50) * 50;
+  let resultFirst = 0;
 
-  hasilSkorSatu = (skorPoinSatu / 50) * 50;
-  txtDisplaySkorSatu.value = hasilSkorSatu;
+  if (getValue > 50) {
+    Swal.fire({
+      title: "Error!",
+      text: "Nilai maksimal 50",
+      icon: "error",
+      confirmButtonText: "Ok",
+    });
+  } else if (isNaN(getValue) || getValue === "" || getValue === undefined) {
+    Swal.fire({
+      title: "Error!",
+      text: "Nilai tidak boleh kosong",
+      icon: "error",
+      confirmButtonText: "Ok",
+    });
 
-  hasilSkorDua = (skorPoinDua / 50) * 50;
-  txtDisplaySkorDua.value = hasilSkorDua;
-
-  hasilTotalNilaiPertama = hasilSkorSatu + hasilSkorDua;
-  totalNilaiPertama.value = hasilTotalNilaiPertama;
-
-  var formPertama = document.getElementsByName("formTransaksiNilaiPertama")[0];
-  if (skorPoinSatu > 50) {
-    alert("Skor melebihi bobot!. Silahkan masukkan skor 1-50");
-    formPertama.reset();
-  }
-
-  if (isNaN(skorPoinSatu)) {
-    alert("Mohon isi skor dengan angka!");
-    formPertama.reset();
-  }
-}
-
-function transaksiNilaiKedua() {
-  // Skor A
-  var skorAsatu = parseInt(document.getElementById("skorAsatu").value);
-  var skorAdua = parseInt(document.getElementById("skorAdua").value);
-  var skorAtiga = parseInt(document.getElementById("skorAtiga").value);
-
-  totalA = skorAsatu + skorAdua + skorAtiga;
-  var ratarataA = (document.getElementById("ratarataA").value = totalA / 3);
-
-  hasilSkorA = (ratarataA / 15) * 15;
-  totalNilaiA = document.getElementById("txtDisplaySkorA").value = hasilSkorA;
-
-  //   Skor B
-  var skorBsatu = parseInt(document.getElementById("skorBsatu").value);
-  var skorBdua = parseInt(document.getElementById("skorBdua").value);
-  var skorBtiga = parseInt(document.getElementById("skorBtiga").value);
-
-  totalB = skorBsatu + skorBdua + skorBtiga;
-  var ratarataB = (document.getElementById("ratarataB").value = totalB / 3);
-
-  hasilSkorB = (ratarataB / 20) * 20;
-  totalNilaiB = document.getElementById("txtDisplaySkorB").value = hasilSkorB;
-
-  //   Skor C
-  var skorCsatu = parseInt(document.getElementById("skorCsatu").value);
-  var skorCdua = parseInt(document.getElementById("skorCdua").value);
-  var skorCtiga = parseInt(document.getElementById("skorCtiga").value);
-
-  totalC = skorCsatu + skorCdua + skorCtiga;
-  var ratarataC = (document.getElementById("ratarataC").value = totalC / 3);
-
-  hasilSkorC = (ratarataC / 20) * 20;
-  totalNilaiC = document.getElementById("txtDisplaySkorC").value = hasilSkorC;
-
-  //   Skor D
-  var skorDsatu = parseInt(document.getElementById("skorDsatu").value);
-  var skorDdua = parseInt(document.getElementById("skorDdua").value);
-  var skorDtiga = parseInt(document.getElementById("skorDtiga").value);
-
-  totalD = skorDsatu + skorDdua + skorDtiga;
-  var ratarataD = (document.getElementById("ratarataD").value = totalD / 3);
-
-  hasilSkorD = (ratarataD / 20) * 20;
-  totalNilaiD = document.getElementById("txtDisplaySkorD").value = hasilSkorD;
-
-  //   Skor E
-  var skorEsatu = parseInt(document.getElementById("skorEsatu").value);
-  var skorEdua = parseInt(document.getElementById("skorEdua").value);
-  var skorEtiga = parseInt(document.getElementById("skorEtiga").value);
-
-  totalE = skorEsatu + skorEdua + skorEtiga;
-  var ratarataE = (document.getElementById("ratarataE").value = totalE / 3);
-
-  hasilSkorE = (ratarataE / 15) * 15;
-  totalNilaiE = document.getElementById("txtDisplaySkorE").value = hasilSkorE;
-
-  //   Skor F
-  var skorFsatu = parseInt(document.getElementById("skorFsatu").value);
-  var skorFdua = parseInt(document.getElementById("skorFdua").value);
-  var skorFtiga = parseInt(document.getElementById("skorFtiga").value);
-
-  totalF = skorFsatu + skorFdua + skorFtiga;
-  var ratarataF = (document.getElementById("ratarataF").value = totalF / 3);
-
-  hasilSkorF = (ratarataF / 10) * 10;
-  totalNilaiF = document.getElementById("txtDisplaySkorF").value = hasilSkorF;
-
-  var hasilTotalNilaiKedua = (document.getElementById("totalNilaiKedua").value =
-    totalNilaiA +
-    totalNilaiB +
-    totalNilaiC +
-    totalNilaiD +
-    totalNilaiE +
-    totalNilaiF);
-
-  nilaiAkhirPertama = (hasilTotalNilaiPertama * 40) / 100;
-  nilaiAkhirKedua = (hasilTotalNilaiKedua * 60) / 100;
-  var nilaiAkhir = document.getElementById("nilaiAkhir").value = nilaiAkhirPertama + nilaiAkhirKedua;
-
-  var nilaiHuruf = document.getElementById("nilaiHuruf");
-  if (nilaiAkhir >= 86 && nilaiAkhir <= 100) {
-    nilaiHuruf.innerHTML = "A";
-  } else if (nilaiAkhir >= 81 && nilaiAkhir < 86) {
-    nilaiHuruf.innerHTML = "A-";
-  } else if (nilaiAkhir >= 76 && nilaiAkhir < 81) {
-    nilaiHuruf.innerHTML = "B+";
-  } else if (nilaiAkhir >= 71 && nilaiAkhir < 76) {
-    nilaiHuruf.innerHTML = "B";
-  } else if (nilaiAkhir >= 66 && nilaiAkhir < 71) {
-    nilaiHuruf.innerHTML = "B-";
-  } else if (nilaiAkhir >= 61 && nilaiAkhir < 66) {
-    nilaiHuruf.innerHTML = "C+";
-  } else if (nilaiAkhir >= 56 && nilaiAkhir < 61) {
-    nilaiHuruf.innerHTML = "C";
-  } else if (nilaiAkhir >= 41 && nilaiAkhir < 56) {
-    nilaiHuruf.innerHTML = "D";
+    // reset all input when the user input empty
+    scores.forEach((skor) => {
+      skor.placeholder = 0;
+    });
   } else {
-    nilaiHuruf.innerHTML = "E";
+    inputBobotxSkor.forEach((result) => {
+      if (result.name === getName) {
+        result.value = getUserInputValue;
+      }
+      resultFirst += parseInt(result.value);
+    });
   }
-}
 
-function simulasiAudit() {
-  var nilaiIndikator1 = parseInt(
-    document.getElementById("nilaiIndikator1").value
-  );
-  var skorIndikator1 = document.getElementById("skorIndikator1");
-  var hasilIndikator1 = 0;
+  // get total bobot x skor
+  const totalBobotSkor = document.getElementById("totalBobotxSkor");
+  totalBobotSkor.value = resultFirst;
 
-  if (nilaiIndikator1 >= 80) {
-    hasilIndikator1 = 4;
-  } else if (nilaiIndikator1 >= 60 && nilaiIndikator1 < 80) {
-    hasilIndikator1 = 3;
-  } else if (nilaiIndikator1 >= 40 && nilaiIndikator1 < 60) {
-    hasilIndikator1 = 2;
-  } else if (nilaiIndikator1 >= 10 && nilaiIndikator1 < 40) {
-    hasilIndikator1 = 1;
-  } else if (nilaiIndikator1 < 10) {
-    hasilIndikator1 = 0;
-  }
-  skorIndikator1.innerHTML = hasilIndikator1;
+  // get nilai akhir
+  // const hasilAkhir = document.getElementById("nilaiAkhir");
 
-  var nilaiIndikator2 = parseInt(
-    document.getElementById("nilaiIndikator2").value
-  );
-  var skorIndikator2 = document.getElementById("skorIndikator2");
-  var hasilIndikator2 = 0;
+  // const nilaiAkhirPertama = (resultFirst * 40) / 100;
+  // const nilaiAkhirKedua = (newBobot * 60) / 100;
+  // hasilAkhir.value = nilaiAkhirPertama + nilaiAkhirKedua;
 
-  if (nilaiIndikator2 >= 80) {
-    hasilIndikator2 = 4;
-  } else if (nilaiIndikator2 >= 60 && nilaiIndikator2 < 80) {
-    hasilIndikator2 = 3;
-  } else if (nilaiIndikator2 >= 40 && nilaiIndikator2 < 60) {
-    hasilIndikator2 = 2;
-  } else if (nilaiIndikator2 >= 10 && nilaiIndikator2 < 40) {
-    hasilIndikator2 = 1;
-  } else if (nilaiIndikator2 < 10) {
-    hasilIndikator2 = 0;
-  }
-  skorIndikator2.innerHTML = hasilIndikator2;
+  // // get nilai huruf
+  // const nilaiHuruf = document.getElementById("nilaiHuruf");
+  // const nilaiAkhir = nilaiAkhirPertama + nilaiAkhirKedua;
+  // if (nilaiAkhir >= 86 && nilaiAkhir <= 100) {
+  //   nilaiHuruf.innerHTML = "A";
+  // } else if (nilaiAkhir >= 81 && nilaiAkhir < 86) {
+  //   nilaiHuruf.innerHTML = "A-";
+  // } else if (nilaiAkhir >= 76 && nilaiAkhir < 81) {
+  //   nilaiHuruf.innerHTML = "B+";
+  // } else if (nilaiAkhir >= 71 && nilaiAkhir < 76) {
+  //   nilaiHuruf.innerHTML = "B";
+  // } else if (nilaiAkhir >= 66 && nilaiAkhir < 71) {
+  //   nilaiHuruf.innerHTML = "B-";
+  // } else if (nilaiAkhir >= 61 && nilaiAkhir < 66) {
+  //   nilaiHuruf.innerHTML = "C+";
+  // } else if (nilaiAkhir >= 56 && nilaiAkhir < 61) {
+  //   nilaiHuruf.innerHTML = "C";
+  // } else if (nilaiAkhir >= 41 && nilaiAkhir < 56) {
+  //   nilaiHuruf.innerHTML = "D";
+  // } else {
+  //   nilaiHuruf.innerHTML = "E";
+  // }
+};
 
-  var nilaiIndikator3 = parseInt(
-    document.getElementById("nilaiIndikator3").value
-  );
-  var skorIndikator3 = document.getElementById("skorIndikator3");
-  var hasilIndikator3 = 0;
+const onHandleInput__2 = (e) => {
+  // KEDUA
+  // get rata-rata
+  const testerScores = document.querySelectorAll("#skorPenguji");
+  const averageScores = document.querySelectorAll("#rataRata");
+  const inputBobotxSkor__2 = document.querySelectorAll("#bobotxSkor");
+  const totalValue = document.querySelector("#totalNilai");
 
-  if (nilaiIndikator3 >= 80) {
-    hasilIndikator3 = 4;
-  } else if (nilaiIndikator3 >= 60 && nilaiIndikator3 < 80) {
-    hasilIndikator3 = 3;
-  } else if (nilaiIndikator3 >= 40 && nilaiIndikator3 < 60) {
-    hasilIndikator3 = 2;
-  } else if (nilaiIndikator3 >= 10 && nilaiIndikator3 < 40) {
-    hasilIndikator3 = 1;
-  } else if (nilaiIndikator3 < 10) {
-    hasilIndikator3 = 0;
-  }
-  skorIndikator3.innerHTML = hasilIndikator3;
+  const getName__2 = e.target.name;
+  const getValue__2 = e.target.value;
+  let resultTesterScores = 0;
+  let tempResult = 0;
 
-  var nilaiIndikator4 = parseInt(
-    document.getElementById("nilaiIndikator4").value
-  );
-  var skorIndikator4 = document.getElementById("skorIndikator4");
-  var hasilIndikator4 = 0;
+  testerScores.forEach((skor) => {
+    if (skor.name === getName__2) {
+      resultTesterScores += parseInt(skor.value);
+      // resultTesterScores += skor.value;
+      // resultTesterScores += parseFloat(skor.value);
 
-  if (nilaiIndikator4 >= 80) {
-    hasilIndikator4 = 4;
-  } else if (nilaiIndikator4 >= 60 && nilaiIndikator4 < 80) {
-    hasilIndikator4 = 3;
-  } else if (nilaiIndikator4 >= 40 && nilaiIndikator4 < 60) {
-    hasilIndikator4 = 2;
-  } else if (nilaiIndikator4 >= 10 && nilaiIndikator4 < 40) {
-    hasilIndikator4 = 1;
-  } else if (nilaiIndikator4 < 10) {
-    hasilIndikator4 = 0;
-  }
-  skorIndikator4.innerHTML = hasilIndikator4;
+      if (getValue__2 >= 100) {
+        return Swal.fire({
+          title: "Error!",
+          text: "Nilai maksimal 100",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      }
 
-  var ratarataNilai = document.getElementById("ratarataNilai");
-  var ratarataSkor = document.getElementById("ratarataSkor");
+      // if the input user isn't a number or empty
+      isNaN(resultTesterScores) &&
+        Swal.fire({
+          title: "Error!",
+          text: "Isikan semua nilai penguji ",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
 
-  ratarataNilai.innerHTML =
-    (nilaiIndikator1 + nilaiIndikator2 + nilaiIndikator3 + nilaiIndikator4) / 4;
-  ratarataSkor.innerHTML =
-    (hasilIndikator1 + hasilIndikator2 + hasilIndikator3 + hasilIndikator4) / 4;
-}
+      averageScores.forEach((rataRata) => {
+        if (rataRata.name === getName__2) {
+          rataRata.value = (resultTesterScores / 3).toFixed(2);
+          tempResult = resultTesterScores / 3;
+        }
+      });
+    }
+  });
+
+  let newBobot = 0;
+
+  inputBobotxSkor__2.forEach((bobot, i) => {
+    if (bobot.name === getName__2) {
+      const getBobot = nilaiKedua[0].data[i].bobot;
+      // const bobotRes = parseInt((tempResult / getBobot) * getBobot);
+      const bobotRes = (tempResult / getBobot) * getBobot;
+      bobot.value = bobotRes.toFixed(2);
+    }
+    newBobot += parseFloat(bobot.value);
+  });
+
+  // get nilai akhir__1
+  // totalValue.value = newBobot;
+};
+
+// ! first form
+
+nilaiPertama.forEach((result) => {
+  const form = document.querySelector(".form__pertama");
+  form.classList.add("form__pertama");
+
+  const table = document.createElement("table");
+  const thead = document.createElement("thead");
+  const subTitleContent = document.createElement("tr");
+
+  // sub title
+  result.subTitle.forEach((title) => {
+    const subTitleElement = document.createElement("th");
+    subTitleElement.innerHTML = title;
+    subTitleContent.appendChild(subTitleElement);
+    thead.appendChild(subTitleContent);
+    table.appendChild(thead);
+  });
+
+  // table body
+  const tBody = document.createElement("tbody");
+  result.data.forEach((data) => {
+    const tr = document.createElement("tr");
+
+    const noElement = document.createElement("td");
+    noElement.textContent = data.no;
+    tr.appendChild(noElement);
+
+    const komponenPenilaianElement = document.createElement("td");
+    komponenPenilaianElement.textContent = data.komponenPenilaian;
+    tr.appendChild(komponenPenilaianElement);
+
+    // skor input
+    const skorElement = document.createElement("td");
+    const skorElementInput = document.createElement("input");
+
+    skorElementInput.setAttribute("type", "number");
+    skorElementInput.setAttribute("autocomplete", "off");
+    skorElementInput.setAttribute("id", "skor");
+    skorElementInput.setAttribute("name", data.no);
+    skorElementInput.setAttribute("min", "0");
+    skorElementInput.setAttribute("max", "50");
+    skorElementInput.setAttribute("placeholder", "0");
+    skorElementInput.addEventListener("input", onHandleInput);
+    skorElementInput.classList.add("input__content");
+
+    skorElement.appendChild(skorElementInput);
+    tr.appendChild(skorElement);
+
+    // bobot x skor input
+    const bobotElement = document.createElement("td");
+    bobotElement.textContent = data.bobot;
+    tr.appendChild(bobotElement);
+
+    const bobotxskorElement = document.createElement("td");
+    const bobotxskorElementInput = document.createElement("input");
+    bobotxskorElementInput.setAttribute("type", "number");
+    bobotxskorElementInput.setAttribute("disabled", "disabled");
+    bobotxskorElementInput.setAttribute("id", "bobotxskor");
+    bobotxskorElementInput.setAttribute("name", data.no);
+    bobotxskorElementInput.setAttribute("min", "0");
+    bobotxskorElementInput.setAttribute("max", "4");
+    bobotxskorElementInput.setAttribute("value", "0");
+    bobotxskorElementInput.classList.add("input__content");
+    bobotxskorElement.appendChild(bobotxskorElementInput);
+    tr.appendChild(bobotxskorElement);
+
+    tBody.appendChild(tr);
+    table.appendChild(tBody);
+  });
+
+  const totalTr = document.createElement("tr");
+  const totalTd = document.createElement("td");
+  const totalBobot = document.createElement("td");
+  const totalBobotxSkor = document.createElement("td");
+  const totalBobotxSkorInput = document.createElement("input");
+
+  totalTd.setAttribute("colspan", "3");
+  totalTd.textContent = "Total";
+  const total = result.data.reduce((acc, cur) => acc + cur.bobot, 0);
+  totalBobot.textContent = total;
+  totalBobotxSkorInput.setAttribute("type", "number");
+  totalBobotxSkorInput.setAttribute("disabled", "disabled");
+  totalBobotxSkorInput.setAttribute("id", "totalBobotxSkor");
+  totalBobotxSkorInput.setAttribute("name", "totalBobotxSkor");
+  totalBobotxSkorInput.setAttribute("min", "0");
+  totalBobotxSkorInput.setAttribute("max", "4");
+  totalBobotxSkorInput.setAttribute("value", "0");
+  totalBobotxSkorInput.classList.add("input__content");
+  totalBobotxSkor.appendChild(totalBobotxSkorInput);
+
+  totalTr.appendChild(totalTd);
+  totalTr.appendChild(totalBobot);
+  totalTr.appendChild(totalBobotxSkor);
+  tBody.appendChild(totalTr);
+  form.appendChild(table);
+});
+
+// ! second form
+nilaiKedua.forEach((result) => {
+  const form = document.querySelector(".form__kedua");
+  form.classList.add("form__kedua");
+
+  const table = document.createElement("table");
+  const thead = document.createElement("thead");
+  const subTitleContent = document.createElement("tr");
+  const addScorPengujiContent = document.createElement("tr");
+
+  // sub title
+  result.subTitle.forEach((subTitle) => {
+    const subTitleElement = document.createElement("th");
+    subTitleElement.setAttribute("rowspan", "2");
+    if (subTitle === "Skor Penguji") {
+      subTitleElement.setAttribute("colspan", "3");
+      subTitleElement.removeAttribute("rowspan");
+    }
+    subTitleElement.textContent = subTitle;
+    subTitleContent.appendChild(subTitleElement);
+  });
+
+  // skor penguji
+  result.jumlahPenguji.forEach((jumlahPenguji) => {
+    const addSkorPengujiContent = document.createElement("th");
+    addSkorPengujiContent.textContent = `${jumlahPenguji}`;
+    addScorPengujiContent.appendChild(addSkorPengujiContent);
+  });
+
+  thead.appendChild(subTitleContent);
+  thead.appendChild(addScorPengujiContent);
+
+  const tBody = document.createElement("tbody");
+  result.data.forEach((data) => {
+    // const tr = document.createElement("tr");
+
+    // no
+    const tr = document.createElement("tr");
+    const noElement = document.createElement("td");
+    noElement.textContent = data.no;
+    tr.appendChild(noElement);
+
+    // komponen penilaian
+    const komponenPenilaianElement = document.createElement("td");
+    komponenPenilaianElement.textContent = data.komponenPenilaian;
+    tr.appendChild(komponenPenilaianElement);
+
+    // skor penguji
+    data.skorPenguji.forEach((sp) => {
+      const skorPengujiElement = document.createElement("td");
+      const skorPengujiElementInput = document.createElement("input");
+      skorPengujiElementInput.setAttribute("type", "number");
+      skorPengujiElementInput.setAttribute("autocomplete", "off");
+      skorPengujiElementInput.setAttribute("id", "skorPenguji");
+      skorPengujiElementInput.setAttribute("name", `${data.no} x `);
+      skorPengujiElementInput.setAttribute("min", "0");
+      skorPengujiElementInput.setAttribute("max", "4");
+      skorPengujiElementInput.setAttribute("placeholder", "0");
+      skorPengujiElementInput.classList.add("input__content");
+      skorPengujiElementInput.addEventListener("input", onHandleInput__2);
+      skorPengujiElement.appendChild(skorPengujiElementInput);
+      tr.appendChild(skorPengujiElement);
+    });
+
+    const rataRataElement = document.createElement("td");
+    const rataRataElementInput = document.createElement("input");
+    rataRataElementInput.setAttribute("type", "number");
+    rataRataElementInput.setAttribute("autocomplete", "off");
+    rataRataElementInput.setAttribute("disabled", "disabled");
+    rataRataElementInput.setAttribute("id", "rataRata");
+    rataRataElementInput.setAttribute("name", `${data.no} x `);
+    rataRataElementInput.setAttribute("untuk", `${data.no}`);
+    rataRataElementInput.setAttribute("min", "0");
+    rataRataElementInput.setAttribute("max", "4");
+    rataRataElementInput.setAttribute("value", "0");
+    rataRataElementInput.classList.add("input__content");
+    rataRataElementInput.addEventListener("input", onHandleInput__2);
+    rataRataElement.appendChild(rataRataElementInput);
+    tr.appendChild(rataRataElement);
+
+    // bobot
+    const bobotElement = document.createElement("td");
+    bobotElement.textContent = data.bobot;
+    tr.appendChild(bobotElement);
+
+    // bobot x skor
+    const bobotxSkorElement = document.createElement("td");
+    const bobotxSkorElementInput = document.createElement("input");
+    bobotxSkorElementInput.setAttribute("type", "number");
+    bobotxSkorElementInput.setAttribute("disabled", "disabled");
+    bobotxSkorElementInput.setAttribute("autocomplete", "off");
+    bobotxSkorElementInput.setAttribute("id", "bobotxSkor");
+    bobotxSkorElementInput.setAttribute("name", `${data.no} x `);
+    bobotxSkorElementInput.setAttribute("min", "0");
+    bobotxSkorElementInput.setAttribute("max", "4");
+    bobotxSkorElementInput.setAttribute("value", "0");
+    bobotxSkorElementInput.classList.add("input__content");
+    bobotxSkorElement.appendChild(bobotxSkorElementInput);
+    tr.appendChild(bobotxSkorElement);
+
+    tBody.appendChild(tr);
+    table.appendChild(tBody);
+  });
+
+  // total
+  const totalTr = document.createElement("tr");
+  const totalTd = document.createElement("td");
+  const totalBobotxSkor = document.createElement("td");
+  const totalBobotxSkorInput = document.createElement("input");
+
+  totalTd.setAttribute("colspan", "7");
+  totalTd.textContent = "Total";
+  totalBobotxSkorInput.setAttribute("type", "number");
+  totalBobotxSkorInput.setAttribute("disabled", "disabled");
+  totalBobotxSkorInput.setAttribute("autocomplete", "off");
+  totalBobotxSkorInput.setAttribute("id", "totalNilai");
+  totalBobotxSkorInput.setAttribute("name", "totalNilai");
+  totalBobotxSkorInput.setAttribute("min", "0");
+  totalBobotxSkorInput.setAttribute("max", "4");
+  totalBobotxSkorInput.setAttribute("value", "0");
+  totalBobotxSkorInput.classList.add("input__content");
+  totalBobotxSkor.appendChild(totalBobotxSkorInput);
+
+  totalTr.appendChild(totalTd);
+  totalTr.appendChild(totalBobotxSkor);
+
+  tBody.appendChild(totalTr);
+  form.appendChild(table);
+
+  // nilai akhir
+  const nilaiAkhirTr = document.createElement("tr");
+  const nilaiAkhirTd = document.createElement("td");
+  const nilaiAkhirskor = document.createElement("td");
+  const nilaiAkhirInput = document.createElement("input");
+
+  nilaiAkhirTd.setAttribute("colspan", "7");
+  nilaiAkhirTd.textContent = "Nilai Akhir";
+  nilaiAkhirInput.setAttribute("type", "number");
+  nilaiAkhirInput.setAttribute("disabled", "disabled");
+  nilaiAkhirInput.setAttribute("autocomplete", "off");
+  nilaiAkhirInput.setAttribute("id", "nilaiAkhir");
+  nilaiAkhirInput.setAttribute("name", "nilaiAkhir");
+  nilaiAkhirInput.setAttribute("min", "0");
+  nilaiAkhirInput.setAttribute("max", "4");
+  nilaiAkhirInput.setAttribute("value", "0");
+  nilaiAkhirInput.classList.add("input__content");
+  nilaiAkhirskor.appendChild(nilaiAkhirInput);
+
+  nilaiAkhirTr.appendChild(nilaiAkhirTd);
+  nilaiAkhirTr.appendChild(nilaiAkhirskor);
+
+  tBody.appendChild(nilaiAkhirTr);
+  form.appendChild(table);
+
+  // nilai huruf
+  const nilaiHurufTr = document.createElement("tr");
+  const nilaiHurufTd = document.createElement("td");
+  const nilaiHurufskor = document.createElement("td");
+
+  nilaiHurufTd.setAttribute("colspan", "7");
+  nilaiHurufTd.textContent = "Nilai Huruf";
+  nilaiHurufskor.setAttribute("id", "nilaiHuruf");
+  nilaiHurufskor.classList.add("nilai-huruf");
+
+  nilaiHurufTr.appendChild(nilaiHurufTd);
+  nilaiHurufTr.appendChild(nilaiHurufskor);
+
+  tBody.appendChild(nilaiHurufTr);
+  form.appendChild(table);
+
+  table.appendChild(thead);
+  form.appendChild(table);
+});

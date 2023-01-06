@@ -1,341 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Syafiq Fajrian Emha - UAS</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Header -->
-    <div class="header">
-        <div class="logo">
-            <img src="img/logo.png" width="30" alt="logo">
-            Syafiq Fajrian Emha
-        </div>
-    </div>
+    <header class="max-width">
+      <img src="img/logo.png" width="30" alt="logo" />
+      <p>Syafiq Fajrian Emha</p>
+    </header>
+    <!-- end-header -->
+
     <!-- Navigation -->
-    <div class="menu">
-        <div class="container">
-            <ul>
-                <li><a href="https://ump.ac.id/" target="_blank">Universitas Muhammadiyah Purwokerto</a></li>
-                <li><a href="https://fts.ump.ac.id/" target="_blank">Fakultas Teknik dan Sains</a></li>
-                <li><a href="https://informatika.ump.ac.id/" target="_blank">Teknik Informatika</a></li>
-            </ul>
-        </div>
-    </div>
+    <nav class="max-width">
+      <ul>
+        <li>
+          <a href="https://ump.ac.id/" target="_blank"
+            >Universitas Muhammadiyah Purwokerto</a
+          >
+        </li>
+        <li>
+          <a href="https://fts.ump.ac.id/" target="_blank"
+            >Fakultas Teknik dan Sains</a
+          >
+        </li>
+        <li>
+          <a href="https://informatika.ump.ac.id/" target="_blank"
+            >Teknik Informatika</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <!-- end-navigation -->
+
     <!-- Content -->
     <div class="container">
-        <!-- Transaksi Nilai -->
-        <div class="transaksiNilai">
-            <div class="judul-transaksinilai">
-                <h2>Simulasi Nilai Skripsi</h2>
-            </div>
-            <form id="formTransaksiNilaiPertama" name="formTransaksiNilaiPertama">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Komponen Penilaian</th>
-                            <th>Skor</th>
-                            <th>Bobot</th>
-                            <th>Bobot x Skor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Ketepatan dan kedisiplinan selama pelaksanaan bimbingan skripsi</td>
-                            <td><input type="text" id="skorPoinSatu" onkeyup="transaksiNilaiPertama()" size="5"></td>
-                            <td>50</td>
-                            <td><input type="text" id="txtDisplaySkorSatu" value="" readonly disabled size="5"></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Kemauan dan tingkat keseriusan dalam menyelesaikan skripsi</td>
-                            <td><input type="text" id="skorPoinDua" onkeyup="transaksiNilaiPertama()" size="5"></td>
-                            <td>50</td>
-                            <td><input type="text" id="txtDisplaySkorDua" value="" readonly disabled size="5"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">TOTAL</td>
-                            <td>100</td>
-                            <td><input type="text" id="totalNilaiPertama" value="" readonly disabled size="5"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-            <br>
-            <form id="formTransaksiNilaiKedua" name="formTransaksiNilaiKedua">
-                <table>
-                    <thead>
-                        <tr>
-                            <th rowspan="2">No</th>
-                            <th rowspan="2">Komponen Penilaian</th>
-                            <th colspan="3">Skor Penguji</th>
-                            <th rowspan="2">Rata Rata</th>
-                            <th rowspan="2">Bobot</th>
-                            <th rowspan="2">Bobot x Skor</th>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Orisinalitas dan kebaruan topik penelitian</td>
-                            <td><input type="text" id="skorAsatu" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorAdua" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorAtiga" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="ratarataA" value="" readonly disabled size="5"></td>
-                            <td>15</td>
-                            <td><input type="text" id="txtDisplaySkorA" value="" readonly disabled size="5"></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Relevansi logis antara judul, masalah, teori, metode dan hasil penelitian</td>
-                            <td><input type="text" id="skorBsatu" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorBdua" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorBtiga" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="ratarataB" value="" readonly disabled size="5"></td>
-                            <td>20</td>
-                            <td><input type="text" id="txtDisplaySkorB" value="" readonly disabled size="5"></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Tata tulis</td>
-                            <td><input type="text" id="skorCsatu" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorCdua" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorCtiga" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="ratarataC" value="" readonly disabled size="5"></td>
-                            <td>20</td>
-                            <td><input type="text" id="txtDisplaySkorC" value="" readonly disabled size="5"></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Penguasaan materi penelitian</td>
-                            <td><input type="text" id="skorDsatu" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorDdua" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorDtiga" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="ratarataD" value="" readonly disabled size="5"></td>
-                            <td>20</td>
-                            <td><input type="text" id="txtDisplaySkorD" value="" readonly disabled size="5"></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Presentasi dan argumentasi jawaban</td>
-                            <td><input type="text" id="skorEsatu" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorEdua" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorEtiga" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="ratarataE" value="" readonly disabled size="5"></td>
-                            <td>15</td>
-                            <td><input type="text" id="txtDisplaySkorE" value="" readonly disabled size="5"></td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Penampilan saat presentasi</td>
-                            <td><input type="text" id="skorFsatu" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorFdua" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="skorFtiga" onkeyup="transaksiNilaiKedua()" size="5"></td>
-                            <td><input type="text" id="ratarataF" value="" readonly disabled size="5"></td>
-                            <td>10</td>
-                            <td><input type="text" id="txtDisplaySkorF" value="" readonly disabled size="5"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="7">Total</td>
-                            <td><input type="text" id="totalNilaiKedua" value="" readonly disabled size="5">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="7">Nilai Akhir</td>
-                            <td><input type="text" id="nilaiAkhir" value="" readonly disabled size="5"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="7">Nilai Huruf</td>
-                            <td><strong id="nilaiHuruf"></strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-        </div>
+      <!-- transaksi nilai -->
+      <div class="title">
+        <h2>Simulasi Nilai Skripsi</h2>
+      </div>
 
-        <!-- Simulasi Audit -->
-        <div class="simulasiAudit">
-            <div class="judul-simulasiAudit">
-                <h2>Simulasi Audit</h2>
-            </div>
-            <form id="formTransaksiNilaiKedua" name="formTransaksiNilaiKedua">
-                <table>
-                    <thead>
-                        <tr>
-                            <th rowspan="2">NO</th>
-                            <th rowspan="2">Indikator</th>
-                            <th colspan="2">Rubrik</th>
-                            <th colspan="2">Keterangan</th>
-                        </tr>
-                        <tr>
-                            <th>Skor</th>
-                            <th>Uraian</th>
-                            <th>Input Nilai</th>
-                            <th>Skor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="5">1</td>
-                            <td rowspan="5">Persentase Dosen yang melakukan kegiatan awal perkuliahan (KAP)</br>
-                                1). Penyampaian sub-CPMK</br>
-                                2). Penyampaian indikator pembelajaran</br>
-                                3). Pemeriksaan kehadiran siswa</td>
-                            <td>4</td>
-                            <td>KAP Dosen >= 80%</td>
-                            <td rowspan="5"><input class="input" type="text" id="nilaiIndikator1" onkeyup="simulasiAudit()">
-                            </td>
-                            <td rowspan="5">
-                                <h2 id="skorIndikator1"></h2>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>60% <= KAP Dosen < 80%</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>40% <= KAP Dosen < 60%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>10% <= KAP Dosen < 40%</td>
-                        </tr>
-                        <tr>
-                            <td>0</td>
-                            <td>KAP Dosen < 10%</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="5">2</td>
-                            <td rowspan="5">Persentase Dosen yang memenuhi karakteristik proses pembelajaran yang
-                                bersifat</br>
-                                interaktif meliputi kegiatan interaksi yang konstruktif antara:</br>
-                                1). Mahasiswa dengan dosen</br>
-                                2). Mahasiswa dengan mahasiswa</br>
-                                3). Mahasiswa dengan sumber belajar</td>
-                            <td>4</td>
-                            <td>Dosen Interaktif >= 80%</td>
-                            <td rowspan="5"><input class="input" type="text" id="nilaiIndikator2" onkeyup="simulasiAudit()">
-                            </td>
-                            <td rowspan="5">
-                                <h2 id="skorIndikator2"></h2>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>60% <= Dosen Interaktif < 80%</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>40% <= Dosen Interaktif < 60%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>10% <= Dosen Interaktif < 40%</td>
-                        </tr>
-                        <tr>
-                            <td>0</td>
-                            <td>Dosen Interaktif < 10%</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="5">3</td>
-                            <td rowspan="5">Persentase Dosen yang memenuhi karakteristik proses pembelajaran</br>
-                                yang bersifat holistik yang meliputi</br>
-                                1). Belajar secara utuh</br>
-                                2). Lingkungan belajar yang berintegritas</br>
-                                3). Mewujudkan pribadi berintegritas antara individu dan sosial</br>
-                                4). Fokus dalam belahar</br>
-                                5). Mengembangkan mahasiswa sesuai potensi</td>
-                            <td>4</td>
-                            <td>Dosen Holistik >= 80%</td>
-                            <td rowspan="5"><input class="input" type="text" id="nilaiIndikator3" onkeyup="simulasiAudit()">
-                            </td>
-                            <td rowspan="5">
-                                <h2 id="skorIndikator3"></h2>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>60% <= Dosen Holistik < 80%</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>40% <= Dosen Holistik < 60%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>10% <= Dosen Holistik < 40%</td>
-                        </tr>
-                        <tr>
-                            <td>0</td>
-                            <td>Dosen Holistik < 10%</td>
-                        </tr>
-                        <td rowspan="5">4</td>
-                        <td rowspan="5">Persentase Dosen yang memenuhi karaktik proses pembelajaran</br>
-                            yang bersifat integratif yang meliputi</br>
-                            1). Menggunakan pendekatan antar mata kuliah</br>
-                            2). Menggabungkan beberapa mata kuliah</br>
-                            3). Menentukan keterampilan, konsep dan sikap dalam beberapa mata kuliah</td>
-                        <td>4</td>
-                        <td>Dosen Integratif >= 80%</td>
-                        <td rowspan="5"><input class="input" type="text" id="nilaiIndikator4" onkeyup="simulasiAudit()">
-                        </td>
-                        <td rowspan="5">
-                            <h2 id="skorIndikator4"></h2>
-                        </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>60% <= Dosen Integratif < 80%</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>40% <= Dosen Integratif < 60%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>10% <= Dosen Integratif < 40%</td>
-                        </tr>
-                        <tr>
-                            <td>0</td>
-                            <td>Dosen Integratif < 10%</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">Rata Rata</td>
-                            <td>
-                                <h2 id="ratarataNilai"></h2>
-                            </td>
-                            <td>
-                                <h2 id="ratarataSkor"></h2>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-        </div>
+      <!-- nilai pertama -->
+      <form class="form__pertama"></form>
+
+      <!-- nilai kedua -->
+      <form class="form__kedua"></form>
+
+      <!-- end-transaksi nilai -->
     </div>
+    <!-- end-Content  -->
+
     <!-- Footer -->
-    <div class="footer">
-        <div class="container">
-            <p>&copy; copyright 2023 | built with <i class="fas fa-heart"></i> by <a
-                    href="https://www.instagram.com/syafiqemha117/" target="_blank">Syafiq Fajrian Emha</a>
-            </p>
-        </div>
-    </div>
-    <script src="script.js"></script>
-</body>
+    <footer>
+      <p>
+        &copy; copyright 2023 | built with <i class="fas fa-heart"></i> by
+        <a href="https://www.instagram.com/syafiqemha117/" target="_blank"
+          >Syafiq Fajrian Emha</a
+        >
+      </p>
+    </footer>
+    <!-- end-footer -->
 
+    <!-- main js -->
+    <script src="script.js"></script>
+    <!-- sweetalert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
 </html>
